@@ -1,4 +1,4 @@
-package modeli;
+package ihm;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,12 +7,14 @@ import java.awt.Point;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Pt_afficher extends JPanel
-{
-	int taille = 5;
+public class AfficherPoint extends JPanel {
+	/** Debug **/
+	boolean debug = true;	
+	
 	Point coord;
-	public Pt_afficher(Graphics g,Point coord,Color couleur) 
+	public AfficherPoint(Graphics g,Point coord,Color couleur) 
 	{
+		int taille = 5;
 		super.paint(g);
 		Color c = g.getColor();
 		this.coord=coord;

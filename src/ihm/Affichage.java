@@ -43,6 +43,12 @@ public class Affichage {
 	public void afficheCourbe(List<Point> courbe, Color c) {
 		for (Point point : courbe) {
 			new AfficherPoint(mainWindow.getGraphics(),point,c);
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO changer le thread
+				e.printStackTrace();
+			}
 		}
 
 		

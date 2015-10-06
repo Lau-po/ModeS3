@@ -37,10 +37,7 @@ public class Calcul {
 		list_pdc.add(new Point((r.nextInt(largeur)),r.nextInt(hauteur)));
 		list_pdc.add(new Point((r.nextInt(largeur)),r.nextInt(hauteur)));
 		//TODO
-		
-		for (Point p : list_pdc) {
-			System.out.println(p);
-		}
+
 		return list_pdc;
 		
 		

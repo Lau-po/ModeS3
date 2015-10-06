@@ -30,10 +30,8 @@ public class Affichage {
 		this.largeur = largeur;
 		mainWindow = new JFrame("AngryCode");
 		mainWindow.setLocationRelativeTo(null);
-		//mainWindow.setPreferredSize(new Dimension(largeur,hauteur));
-		mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		mainWindow.setPreferredSize(new Dimension(largeur,hauteur));
 		mainWindow.setContentPane(new JPanel());
-		mainWindow.getContentPane().setBackground(Color.white);
 		mainWindow.pack();
 		mainWindow.setVisible(true);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,10 +40,12 @@ public class Affichage {
 		list_pdc = new ArrayList<Point>();
 	}
 	
-	public void afficheCourbe(List<Point> courbe) {
+	public void afficheCourbe(List<Point> courbe, Color c) {
 		for (Point point : courbe) {
-			new AfficherPoint(mainWindow.getGraphics(),point,Color.red);
+			new AfficherPoint(mainWindow.getGraphics(),point,c);
 		}
+
+		
 	}
 
 	public int getSc_hauteur() {

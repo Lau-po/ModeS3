@@ -13,7 +13,7 @@ public class Parabole extends Observable implements Modele {
   private List<Point> courbe;
   private List<Obstacle> obstacles;
   private double pas = 0.001;
-  private boolean colision = false;
+  private boolean collision = false;
 
   public Parabole() {
     courbe = new ArrayList<>();
@@ -26,13 +26,23 @@ public class Parabole extends Observable implements Modele {
     this.pas = pas;
   }
 
+  @Override
   public void go() {
     double y;
-    for (float x = 0; x < 970; x += pas) {
+    for (float x = 0; x < 970 && !collision; x += pas) {
       y = (37.0 / 20250.0) * (x * x) + (-74.0 / 45.0) * x + 470;
       courbe.add(new Point((int) x, (int) y));
       setChanged();
       notifyObservers();
+    }
+    if (collision) {
+      try {
+        Thread.sleep(1500);
+      } catch (Exception e) {
+        // TODO: handle exception
+      } finally {
+        collision = false;
+      }
     }
   }
 
@@ -48,17 +58,25 @@ public class Parabole extends Observable implements Modele {
     }
   }
 
+  @Override
   public List<Point> getCourbe() {
     return courbe;
   }
 
+  @Override
   public List<Obstacle> getObstacles() {
     return obstacles;
   }
 
+  @Override
   public void reset() {
     courbe = new ArrayList<>();
     obstacles = new ArrayList<>();
     genObstacles();
+  }
+
+  @Override
+  public void setCollision(boolean b) {
+    this.collision = b;
   }
 }

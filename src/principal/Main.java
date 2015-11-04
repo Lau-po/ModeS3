@@ -1,24 +1,24 @@
 package principal;
 
-import java.awt.Color;
+import java.util.Observable;
 
-import Modele.Bezier;
+import Controller.Controller;
+import Modele.Modele;
 import Modele.Parabole;
 import Vue.Frame;
 
 public class Main {
   public static void main(String[] args) {
-    Bezier b = new Bezier(0.01);
-    Parabole p = new Parabole(5);
-    Frame f = new Frame(p, null);
-    p.go();
-    b.go();
+    // Modele m = new Bezier(0.005);
+    Modele m = new Parabole(3);
+    Frame f = new Frame((Observable) m, new Controller());
+    m.go();
     while (true) {
-      p.reset();
-      f.getFrame().repaint();
-      p.go();
+      m.reset();
+      f.repaint();
+      m.go();
       try {
-       Thread.sleep(1000); 
+        Thread.sleep(1000);
       } catch (Exception e) {
         // TODO: handle exception
       }

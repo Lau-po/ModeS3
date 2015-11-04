@@ -73,8 +73,14 @@ public class Bezier extends Observable implements Modele{
     return courbe;
   }
 
-  @Override
   public List<Obstacle> getObstacles() {
     return obstacles;
+  }
+  
+  public void reset() {
+    createPointCtrl();
+    obstacles = new ArrayList<Obstacle>();
+    genObstacles();
+    courbe = new ArrayList<>();
   }
 }

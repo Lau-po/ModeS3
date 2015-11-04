@@ -13,4 +13,5 @@ public interface Modele {
   
   public List<Obstacle> getObstacles();
   
+  public void reset();
 }

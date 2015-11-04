@@ -13,6 +13,7 @@ public class Parabole extends Observable implements Modele {
   private List<Point> courbe;
   private List<Obstacle> obstacles;
   private double pas = 0.001;
+  private boolean colision = false;
 
   public Parabole() {
     courbe = new ArrayList<>();
@@ -53,5 +54,11 @@ public class Parabole extends Observable implements Modele {
 
   public List<Obstacle> getObstacles() {
     return obstacles;
+  }
+
+  public void reset() {
+    courbe = new ArrayList<>();
+    obstacles = new ArrayList<>();
+    genObstacles();
   }
 }

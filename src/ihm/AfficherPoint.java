@@ -23,7 +23,7 @@ public class AfficherPoint extends JPanel {
     this.coord = coord;
     g.setColor(color);
     g.fillOval(coord.x - (taille / 2), coord.y - (taille / 2), taille, taille);
-    //g.setColor(c);
+    g.setColor(c);
   }
 
   public int getX() {

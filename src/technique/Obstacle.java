@@ -5,7 +5,6 @@ import java.awt.Point;
 
 public class Obstacle extends Point {
 
-  public static final Color COLOR = Color.blue;
   private boolean touched;
 
   public Obstacle(int x, int y) {

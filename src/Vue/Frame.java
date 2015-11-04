@@ -1,5 +1,6 @@
 package Vue;
 
+import ihm.AfficherObstacle;
 import ihm.AfficherPoint;
 
 import java.awt.Color;
@@ -11,6 +12,8 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import technique.Obstacle;
 
 import Controller.Controller;
 import Modele.Bezier;
@@ -25,16 +28,23 @@ public class Frame implements Observer {
     frame.setResizable(false);
     frame.setSize(new Dimension(900, 470));
     frame.setLocationRelativeTo(null);
-    frame.setContentPane(new JPanel());
+    //frame.setContentPane(new JPanel());
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     model.addObserver(this);
+    // afficherObstacles(((Modele)model).getObstacles(), Color.RED);
   }
 
   public void afficherCourbe(List<Point> courbe, Color c) {
     for (Point point : courbe) {
       new AfficherPoint(frame.getGraphics(), point, c);
+    }
+  }
+
+  public void afficherObstacles(List<Obstacle> obs, Color c) {
+    for (Point point : obs) {
+      new AfficherObstacle(frame.getGraphics(), point, c);
     }
   }
 

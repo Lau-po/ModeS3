@@ -11,16 +11,19 @@ public class AfficherPoint extends JPanel {
   /** Debug **/
   boolean debug = true;
 
-  Point coord;
+  private Point coord;
 
-  public AfficherPoint(Graphics g, Point coord, Color couleur) {
-    int taille = 5;
-    super.paint(g);
+  public AfficherPoint(Graphics g, Point coord, Color color) {
+    this(g, coord, color, 5);
+  }
+  
+  public AfficherPoint(Graphics g, Point coord, Color color, int taille) {
+    super();
     Color c = g.getColor();
     this.coord = coord;
-    g.setColor(couleur);
+    g.setColor(color);
     g.fillOval(coord.x - (taille / 2), coord.y - (taille / 2), taille, taille);
-    g.setColor(c);
+    //g.setColor(c);
   }
 
   public int getX() {

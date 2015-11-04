@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Controller.Controller;
 import Modele.Bezier;
+import Modele.Modele;
 
 public class Frame implements Observer {
 
@@ -34,22 +35,12 @@ public class Frame implements Observer {
   public void afficherCourbe(List<Point> courbe, Color c) {
     for (Point point : courbe) {
       new AfficherPoint(frame.getGraphics(), point, c);
-      // try {
-      // Thread.sleep(1);
-      // } catch (InterruptedException e) {
-      // // TODO changer le thread
-      // e.printStackTrace();
-      // }
     }
   }
 
   @Override
   public void update(Observable arg0, Object arg1) {
-    System.out.println(arg0);
-    System.out.println(arg1);
-    System.out.println(((Bezier) arg0).getCourbe());
-    afficherCourbe(((Bezier) arg0).getCourbe(), Color.BLUE);
-
+    afficherCourbe(((Modele) arg0).getCourbe(), Color.BLUE);
   }
 
 }

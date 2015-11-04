@@ -6,19 +6,24 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
-public class Bezier extends Observable {
+public class Bezier extends Observable implements Modele{
 
   private List<Point> courbe;
   private List<Point> ctrl;
+  private double pas = 0.001;
 
   public Bezier() {
-    System.out.println("toto");
     createPointCtrl();
     courbe = new ArrayList<>();
   }
+  
+  public Bezier(double pas) {
+    this();
+    this.pas = pas;
+  }
 
   public void go() {
-    for (float i = 0; i <= 1; i += 0.01) {
+    for (float i = 0; i <= 1; i += pas) {
       courbe.add(createCurve(ctrl, i));
       setChanged();
       notifyObservers();

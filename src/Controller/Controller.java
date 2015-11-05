@@ -21,8 +21,6 @@ public class Controller {
   public void collision() {
     this.courbe = modele.getCourbe();
     this.obstacles = modele.getObstacles();
-    // TODO test collision qui bloque la génération et l'affichage
-
     Obstacle o;
     for (Point point : courbe) {
       if (point.getX() > 400) {

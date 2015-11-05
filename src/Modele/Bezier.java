@@ -3,24 +3,19 @@ package Modele;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Random;
 
 import technique.Obstacle;
 
-public class Bezier extends Observable implements Modele {
+public class Bezier extends ObservableModele {
 
-  private List<Point> courbe;
   private List<Point> ctrl;
-  private List<Obstacle> obstacles;
   private double pas = 0.001;
-  private boolean collision = false;
 
   public Bezier() {
+    super();
     createPointCtrl();
-    obstacles = new ArrayList<Obstacle>();
     genObstacles();
-    courbe = new ArrayList<>();
   }
 
   public Bezier(double pas) {
@@ -81,16 +76,6 @@ public class Bezier extends Observable implements Modele {
   }
 
   @Override
-  public List<Point> getCourbe() {
-    return courbe;
-  }
-
-  @Override
-  public List<Obstacle> getObstacles() {
-    return obstacles;
-  }
-
-  @Override
   public void reset() {
     createPointCtrl();
     obstacles = new ArrayList<Obstacle>();
@@ -98,8 +83,4 @@ public class Bezier extends Observable implements Modele {
     courbe = new ArrayList<>();
   }
 
-  @Override
-  public void setCollision(boolean b) {
-    this.collision = b;
-  }
 }

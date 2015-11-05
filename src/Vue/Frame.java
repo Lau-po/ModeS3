@@ -15,14 +15,15 @@ import javax.swing.JFrame;
 import technique.Obstacle;
 import Controller.Controller;
 import Modele.Modele;
+import Modele.ObservableModele;
 
 public class Frame implements Observer {
 
   private JFrame frame;
-  private Observable modele;
+  private ObservableModele modele;
   private Controller controller;
 
-  public Frame(Observable model, Controller controller) {
+  public Frame(ObservableModele model, Controller controller) {
     frame = new JFrame("Modelisation");
     frame.setResizable(false);
     frame.setSize(new Dimension(900, 470));
@@ -32,7 +33,7 @@ public class Frame implements Observer {
 
     this.modele = model;
     this.controller = controller;
-    controller.setModele((Modele) modele);
+    controller.setModele(modele);
     controller.setObserver(this);
 
     model.addObserver(this);
@@ -50,7 +51,7 @@ public class Frame implements Observer {
     }
   }
 
-  public void setModele(Observable modele) {
+  public void setModele(ObservableModele modele) {
     this.modele = modele;
   }
 
@@ -58,15 +59,21 @@ public class Frame implements Observer {
     return frame;
   }
 
-  public void repaint() {
-    frame.repaint();
-  }
-
   @Override
   public void update(Observable arg0, Object arg1) {
     controller.collision();
     afficherCourbe(((Modele) arg0).getCourbe(), Color.BLUE);
     afficherObstacles(((Modele) arg0).getObstacles());
+  }
+
+  public void startSimulation() {
+    modele.go();
+  }
+
+  public void restartSimulation() {
+    modele.reset();
+    frame.repaint();
+    startSimulation();
   }
 
 }

@@ -2,22 +2,16 @@ package Modele;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
 import java.util.Random;
 
 import technique.Obstacle;
 
-public class Parabole extends Observable implements Modele {
+public class Parabole extends ObservableModele {
 
-  private List<Point> courbe;
-  private List<Obstacle> obstacles;
   private double pas = 0.001;
-  private boolean collision = false;
 
   public Parabole() {
-    courbe = new ArrayList<>();
-    obstacles = new ArrayList<>();
+    super();
     genObstacles();
   }
 
@@ -59,24 +53,10 @@ public class Parabole extends Observable implements Modele {
   }
 
   @Override
-  public List<Point> getCourbe() {
-    return courbe;
-  }
-
-  @Override
-  public List<Obstacle> getObstacles() {
-    return obstacles;
-  }
-
-  @Override
   public void reset() {
     courbe = new ArrayList<>();
     obstacles = new ArrayList<>();
     genObstacles();
   }
 
-  @Override
-  public void setCollision(boolean b) {
-    this.collision = b;
-  }
 }

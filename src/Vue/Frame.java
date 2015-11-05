@@ -40,8 +40,10 @@ public class Frame implements Observer {
   }
 
   public void afficherCourbe(List<Point> courbe, Color c) {
-    for (Point point : courbe) {
-      new AfficherPoint(frame.getGraphics(), point, c);
+    for (int i = 0; i < courbe.size(); i++) {
+      if (i % 10 == 0) {
+        new AfficherPoint(frame.getGraphics(), courbe.get(i), c);
+      }
     }
   }
 

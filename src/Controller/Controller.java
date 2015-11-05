@@ -14,10 +14,17 @@ public class Controller {
   private List<Point> courbe;
   private List<Obstacle> obstacles;
 
+  /**
+   * Construit un controller
+   */
   public Controller() {
 
   }
 
+  /**
+   * Calcul s'il y a un collision entre la courbe et les obstacles du modele et stop la simulation
+   * si besoin
+   */
   public void collision() {
     this.courbe = modele.getCourbe();
     this.obstacles = modele.getObstacles();
@@ -41,10 +48,18 @@ public class Controller {
 
   }
 
+  /**
+   * 
+   * @param modele le modele que le controller doit controler
+   */
   public void setModele(Modele modele) {
     this.modele = modele;
   }
 
+  /**
+   * 
+   * @param observer l'observer du modele
+   */
   public void setObserver(Observer observer) {
     this.observer = observer;
   }

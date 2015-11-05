@@ -12,17 +12,28 @@ public class Bezier extends ObservableModele {
   private List<Point> ctrl;
   private double pas = 0.001;
 
+  /**
+   * Construit une courbe de Bezier a 3 points de controle
+   */
   public Bezier() {
     super();
     createPointCtrl();
     genObstacles();
   }
 
+  /**
+   * Construit une courbe de Bezier avec un pas de p
+   * 
+   * @param pas le pas de la courbe
+   */
   public Bezier(double pas) {
     this();
     this.pas = pas;
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void go() {
     for (float i = 0; i <= 1 && !collision; i += pas) {
@@ -75,6 +86,9 @@ public class Bezier extends ObservableModele {
     }
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void reset() {
     createPointCtrl();

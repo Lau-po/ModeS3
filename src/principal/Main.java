@@ -8,7 +8,7 @@ import Vue.Frame;
 public class Main {
   public static void main(String[] args) {
     // ObservableModele m = new Bezier(0.005);
-    ObservableModele m = new Parabole(3);
+    ObservableModele m = new Parabole(1);
     Frame f = new Frame(m, new Controller());
     f.startSimulation();
     while (true) {
@@ -18,7 +18,6 @@ public class Main {
       } catch (Exception e) {
         // TODO: handle exception
       }
-      System.out.println(1);
     }
   }
 }

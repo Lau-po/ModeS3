@@ -10,16 +10,27 @@ public class Parabole extends ObservableModele {
 
   private double pas = 0.001;
 
+  /**
+   * Construit une parabole (depend pour l'instant d'une fenetre de 900*470)
+   */
   public Parabole() {
     super();
     genObstacles();
   }
 
+  /**
+   * Construit une parabole avec un pas de p
+   * 
+   * @param pas le pas de la parabole
+   */
   public Parabole(double pas) {
     this();
     this.pas = pas;
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void go() {
     double y;
@@ -52,6 +63,9 @@ public class Parabole extends ObservableModele {
     }
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void reset() {
     courbe = new ArrayList<>();

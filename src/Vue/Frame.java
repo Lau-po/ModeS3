@@ -23,6 +23,12 @@ public class Frame implements Observer {
   private ObservableModele modele;
   private Controller controller;
 
+  /**
+   * Construit une fenetre pour le jeu avec un modele a observer et son controller
+   * 
+   * @param model le model a observer
+   * @param controller le controller associe
+   */
   public Frame(ObservableModele model, Controller controller) {
     frame = new JFrame("Modelisation");
     frame.setResizable(false);
@@ -39,6 +45,12 @@ public class Frame implements Observer {
     model.addObserver(this);
   }
 
+  /**
+   * affiche les %10 points de la courbe dans la fenetre
+   * 
+   * @param courbe la liste des points a afficher
+   * @param c la couleur dans laquelle les afficher
+   */
   public void afficherCourbe(List<Point> courbe, Color c) {
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
@@ -47,16 +59,28 @@ public class Frame implements Observer {
     }
   }
 
+  /**
+   * affiche les obstacles dans la fenetre
+   * 
+   * @param obs la liste des obstacles a afficher
+   */
   public void afficherObstacles(List<Obstacle> obs) {
     for (Obstacle obstacle : obs) {
       new AfficherObstacle(frame.getGraphics(), obstacle, obstacle.getC());
     }
   }
 
+  /**
+   * 
+   * @param modele le modele observable associe au jeu
+   */
   public void setModele(ObservableModele modele) {
     this.modele = modele;
   }
 
+  /**
+   * @return JFrame la fenetre du jeu
+   */
   public JFrame getFrame() {
     return frame;
   }
@@ -68,12 +92,20 @@ public class Frame implements Observer {
     afficherObstacles(((Modele) arg0).getObstacles());
   }
 
+  /**
+   * demarre une simulation
+   */
   public void startSimulation() {
+    System.out.println("\n\nSimulation demarree");
     modele.go();
   }
 
+  /**
+   * reset le modele et redemarre une simulation
+   */
   public void restartSimulation() {
     modele.reset();
+    System.out.println("Modele reset");
     frame.repaint();
     startSimulation();
   }

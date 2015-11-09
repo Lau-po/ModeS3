@@ -21,7 +21,7 @@ public class Obstacle extends Point {
   }
 
   /**
-   *
+   * 
    * @return si l'obstacle est touche ou non
    */
   public boolean isTouched() {
@@ -42,7 +42,7 @@ public class Obstacle extends Point {
   }
 
   /**
-   * @see Modele.Modele
+   * @see Point 
    */
   @Override
   public double getX() {
@@ -50,7 +50,7 @@ public class Obstacle extends Point {
   }
 
   /**
-   * @see Modele.Modele
+   * @see Point 
    */
   @Override
   public double getY() {

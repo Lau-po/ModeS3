@@ -1,5 +1,6 @@
 /**
  * Classe qui créer une parabole de test
+ * 
  * @author Groupe N5
  */
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class Parabole extends ObservableModele {
 
-  /** Nombre de pas de la courbe*/
+  /** Nombre de pas de la courbe */
   private double pas = 0.001;
 
   /**
@@ -22,7 +23,8 @@ public class Parabole extends ObservableModele {
   }
 
   /**
-   * Construit une parabole avec un pas de p 
+   * Construit une parabole avec un pas de p
+   * 
    * @param pas de la parabole
    */
   public Parabole(double pas) {
@@ -46,12 +48,13 @@ public class Parabole extends ObservableModele {
       try {
         Thread.sleep(1500);
       } catch (InterruptedException e) {
-  		e.printStackTrace();
-  	} finally {
+        e.printStackTrace();
+      } finally {
         collision = false;
       }
     }
   }
+
   /**
    * Fonction qui génére les obstacles
    */
@@ -74,6 +77,6 @@ public class Parabole extends ObservableModele {
    */
   @Override
   public Piaf getPiaf() {
-	  return oiseau;
+    return oiseau;
   }
 }

@@ -1,5 +1,6 @@
 /**
  * Classe qui gère le modèle général
+ * 
  * @author Groupe N5
  */
 
@@ -17,18 +18,21 @@ public interface Modele {
 
   /**
    * Liste des points de la courbe
+   * 
    * @return la liste des points de la courbe
    */
   public List<Point> getCourbe();
-  
+
   /**
    * Fonction pour obtenir l'oiseau
+   * 
    * @return le piaf
    */
   public Piaf getPiaf();
 
   /**
    * Fonction pour obtenir la liste des obstacles
+   * 
    * @return la liste des obstacles du jeu
    */
   public List<Obstacle> getObstacles();
@@ -40,6 +44,7 @@ public interface Modele {
 
   /**
    * Fonction qui détermine si il y a une collision
+   * 
    * @param b la collision
    */
   public void setCollision(boolean b);

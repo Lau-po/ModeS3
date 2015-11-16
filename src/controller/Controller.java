@@ -35,18 +35,16 @@ public class Controller {
     this.obstacles = modele.getObstacles();
     Obstacle o;
     for (Point point : courbe) {
-      if (point.getX() > 400) {
-        for (int i = 0; i < obstacles.size(); i++) {
-          o = obstacles.get(i);
-          if (!o.isTouched()) {
-            if (point.getX() - 20 / 2 < o.getX() + (o.getSize() / 2)
-                && point.getX() + 20 / 2 > o.getX() - (o.getSize()) / 2) {
-              if (point.getY() - 20 / 2 < o.getY() + (o.getSize() / 2)
-                  && point.getY() + 20 / 2 > o.getY() - (o.getSize() / 2)) {
-                System.out.println("collision");
-                o.setTouched(true);
-                modele.setCollision(true);
-              }
+      for (int i = 0; i < obstacles.size(); i++) {
+        o = obstacles.get(i);
+        if (!o.isTouched()) {
+          if (point.getX() - 20 / 2 < o.getX() + (o.getSize() / 2)
+              && point.getX() + 20 / 2 > o.getX() - (o.getSize()) / 2) {
+            if (point.getY() - 20 / 2 < o.getY() + (o.getSize() / 2)
+                && point.getY() + 20 / 2 > o.getY() - (o.getSize() / 2)) {
+              System.out.println("collision");
+              o.setTouched(true);
+              modele.setCollision(true);
             }
           }
         }

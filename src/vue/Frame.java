@@ -6,6 +6,7 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 import java.util.Observable;
@@ -29,6 +30,7 @@ public class Frame implements Observer {
   private ObservableModele modele;
   /** Controleur de la vue */
   private Controller controller;
+  private int toto = 0;
 
   /**
    * Constructeur de base
@@ -59,9 +61,11 @@ public class Frame implements Observer {
    * @param c = la couleur dans laquelle les afficher
    */
   public void afficherCourbe(List<Point> courbe, Color c) {
+    Graphics g = frame.getGraphics();
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
-        new AfficherPoint(frame.getGraphics(), courbe.get(i), c);
+        g.fillOval(courbe.get(i).x - (5 / 2), courbe.get(i).y - (5 / 2), 5, 5);
+
       }
     }
   }
@@ -82,8 +86,12 @@ public class Frame implements Observer {
    * @param obs = la liste des obstacles a afficher
    */
   public void afficherObstacles(List<Obstacle> obs) {
+    Graphics g = frame.getGraphics();
     for (Obstacle obstacle : obs) {
-      new AfficherObstacle(frame.getGraphics(), obstacle, obstacle.getSize(), obstacle.getC());
+      // new AfficherObstacle(frame.getGraphics(), obstacle, obstacle.getSize(), obstacle.getC());
+      g.setColor(obstacle.getC());
+      g.fillOval(obstacle.x - (15 / 2), obstacle.y - (15 / 2), 15, 15);
+      g.setColor(Color.white);
     }
   }
 

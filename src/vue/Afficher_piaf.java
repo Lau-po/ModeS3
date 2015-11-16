@@ -30,6 +30,7 @@ public class Afficher_piaf extends JPanel {
    */
   public Afficher_piaf(Graphics g, Piaf coord, Color color) {
     super();
+    // TODO afficher un piaf blanc aux anciennes coord puis afficher un point pour la courbe
     g.setColor(Color.white);
     g.fillRect(0, 0, 1000, 1000);
     g.setColor(Color.black);

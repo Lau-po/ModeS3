@@ -19,8 +19,8 @@ public class Obstacle extends Point {
   private Color c = Color.red;
   /** Taille des obstacles */
   private int size;
-  /** Obstacle carre ou non */
-  private boolean isSquare = false;
+  /** indique si l'obstacle est de type mouvant */
+  boolean bougeant;
 
   /**
    * Constructeur de base
@@ -31,13 +31,25 @@ public class Obstacle extends Point {
   public Obstacle(int x, int y, int size) {
     super(x, y);
     this.touched = false;
-    Random rd = new Random();
-    int i = rd.nextInt(100)%2;
-    if (i==0) {
-      this.isSquare = false;
-    }
     this.size = size;
+    this.bougeant = new Random().nextBoolean();
   }
+  
+  
+	public void move() 
+    {
+		if(bougeant)
+		{
+			int new_x = this.x;
+			int new_y = this.y;
+			
+			//TODO switch pr direction sur var a crée
+			new_x--;
+			new_y--;
+			
+			super.move(new_x, new_y);
+		}
+	}
 
   /**
    * Fonction qui détermine si un obstacle est touché

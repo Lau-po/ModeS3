@@ -39,23 +39,8 @@ public class Parabole extends ObservableModele {
   public void go() {
     double y;
     for (float x = 0; x < 970 && !collision; x += pas) {
-      try {
-        Thread.sleep(10);
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
       y = (37.0 / 20250.0) * (x * x) + (-74.0 / 45.0) * x + 470;
       courbe.add(new Point((int) x, (int) y));
-      Point point =
-          new Point((int) (courbe.get(courbe.size() - 1).getX() - courbe.get(courbe.size() - 2)
-              .getX()) * 10, (int) (courbe.get(courbe.size() - 1).getY() - courbe.get(
-              courbe.size() - 2).getY()) * 10);
-      Point p2 =
-          new Point((int) (courbe.get(courbe.size() - 2).getX() + point.getX()), (int) (courbe.get(
-              courbe.size() - 2).getY() + point.getY()));
-      oiseau.move((int) courbe.get(courbe.size() - 2).getX(), (int) courbe.get(courbe.size() - 2)
-          .getY(), p2);
       setChanged();
       notifyObservers();
     }
@@ -83,7 +68,6 @@ public class Parabole extends ObservableModele {
   @Override
   public void reset() {
     courbe = new ArrayList<>();
-    courbe.add(new Point(0, 0));
     obstacles = new ArrayList<>();
     genObstacles();
   }

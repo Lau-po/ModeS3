@@ -30,7 +30,6 @@ public abstract class ObservableModele extends Observable implements Modele {
     courbe = new ArrayList<Point>();
     obstacles = new ArrayList<Obstacle>();
     oiseau = new Piaf(0, 0, new Point(0, 0));
-    courbe.add(new Point(0,0));
   }
 
   /**

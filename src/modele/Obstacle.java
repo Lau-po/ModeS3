@@ -8,6 +8,7 @@ package modele;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Random;
 
 @SuppressWarnings("serial")
 public class Obstacle extends Point {
@@ -18,6 +19,8 @@ public class Obstacle extends Point {
   private Color c = Color.red;
   /** Taille des obstacles */
   private int size;
+  /** Obstacle carre ou non */
+  private boolean isSquare = false;
 
   /**
    * Constructeur de base
@@ -28,6 +31,11 @@ public class Obstacle extends Point {
   public Obstacle(int x, int y, int size) {
     super(x, y);
     this.touched = false;
+    Random rd = new Random();
+    int i = rd.nextInt(100)%2;
+    if (i==0) {
+      this.isSquare = false;
+    }
     this.size = size;
   }
 

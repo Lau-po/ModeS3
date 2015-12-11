@@ -21,11 +21,12 @@ public class ObstacleTest {
 	}
 
 	/**
-	 * Test size of the Obstacle
+	 * Test setter and getter size of the Obstacle
 	 */
 	@Test
-	public void testGetSize() {
-		assertEquals(10, O.getSize());
+	public void testSize() {
+		O.setSize(15);
+		assertEquals(15, O.getSize());
 	}
 	
 	/**
@@ -36,16 +37,6 @@ public class ObstacleTest {
 		assertEquals(55, O.getY(),0);
 	}
 	
-	
-	/**
-	 * Test if GetC is right
-	 */
-	@Test
-	public void testGetC() {
-		if(!O.getC().equals(Color.RED)){
-			fail("Wrong color");
-		}
-	}
 
 	/**
 	 * Test if GetX is right
@@ -77,4 +68,25 @@ public class ObstacleTest {
 		}
 		O.move(50,55);
 	}
+	
+	/**
+	 * Test le paramétrage de la couleur
+	 */
+	@Test
+	public void testColor(){
+		O.setC(Color.BLUE);
+		if(!O.getC().equals(Color.BLUE)){
+			fail("Wrong color");
+		}
+	}
+	
+	/**
+	 * Test le paramétrage de la mobilité de l'obstacle
+	 */
+	@Test
+	public void testMobilite(){
+		O.setBougeant(true);
+		assertTrue(O.isBougeant());
+	}
+	
 }

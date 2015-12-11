@@ -12,9 +12,17 @@ import java.util.ArrayList;
 public class Parabole extends ObservableModele {
 
   /** Nombre de pas de la courbe */
-  private double pas = 0.001;
+  private double pas = resources.Constants.PAS;
 
   /**
+   * Retourne le nombre de pas
+   * @return double
+   */
+  public double getPas() {
+	return pas;
+  }
+
+/**
    * Constructeur de base (depend pour l'instant d'une fenetre de 900*470)
    */
   public Parabole() {

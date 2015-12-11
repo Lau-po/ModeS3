@@ -6,6 +6,7 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import modele.Bezier;
 import modele.Modele;
@@ -26,6 +28,8 @@ public class Frame implements Observer {
 
   /** Fenêtre principale */
   private JFrame frame;
+  /** JPanel d'affichage */
+  private JPanel panel;
   /** Modèle observable */
   private ObservableModele modele;
   /** Controleur de la vue */
@@ -40,11 +44,15 @@ public class Frame implements Observer {
    */
   public Frame(ObservableModele model, Controller controller) {
     frame = new JFrame("Modelisation");
+    panel = new JPanel(new FlowLayout(),true);
     frame.setResizable(false);
     frame.setSize(new Dimension(900, 470));
+    panel.setSize(frame.getSize());
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
+    panel.setVisible(frame.isVisible());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.add(panel);
 
     this.modele = model;
     this.controller = controller;
@@ -61,7 +69,7 @@ public class Frame implements Observer {
    * @param c = la couleur dans laquelle les afficher
    */
   public void afficherCourbe(List<Point> courbe, Color c) {
-    Graphics g = frame.getGraphics();
+    Graphics g = panel.getGraphics();
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
         g.fillOval(courbe.get(i).x - (5 / 2), courbe.get(i).y - (5 / 2), 5, 5);
@@ -77,7 +85,7 @@ public class Frame implements Observer {
    * @param c = couleur de l'oiseau
    */
   public void afficherPiaf(Piaf oiseau, Color c) {
-    new Afficher_piaf(frame.getGraphics(), oiseau, c);
+    new Afficher_piaf(panel.getGraphics(), oiseau, c);
   }
 
   /**
@@ -86,7 +94,7 @@ public class Frame implements Observer {
    * @param obs = la liste des obstacles a afficher
    */
   public void afficherObstacles(List<Obstacle> obs) {
-    Graphics g = frame.getGraphics();
+    Graphics g = panel.getGraphics();
     for (Obstacle obstacle : obs) {
       // new AfficherObstacle(frame.getGraphics(), obstacle, obstacle.getSize(), obstacle.getC());
       g.setColor(obstacle.getC());

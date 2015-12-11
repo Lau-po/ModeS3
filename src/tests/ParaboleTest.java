@@ -20,38 +20,50 @@ public class ParaboleTest {
 	public void setUp() {
 		p = new Parabole();
 	}
-	
+
 	/**
 	 * Test les constantes
 	 */
 	@Test
-	public void constantWellSaved(){
-		assertEquals(p.getPas(),0.001,0);
+	public void constantWellSaved() {
+		assertEquals(p.getPas(), 0.001, 0);
 	}
-	
+
 	/**
 	 * Test si le reset fonctionne bien.
 	 */
 	@Test
-	public void testReset(){
+	public void testReset() {
 		p.go();
 		p.reset();
-		if(!p.getCourbe().isEmpty()){
+		if (!p.getCourbe().isEmpty()) {
 			fail("Reset ne fonctionne pas");
 		}
-		if(p.getObstacles().isEmpty()){
+		if (p.getObstacles().isEmpty()) {
 			fail("Reset ne fonctionne pas");
 		}
 	}
-	
+
 	/**
 	 * Verifie le parametrage du piaf
 	 */
 	@Test
-	public void testPiaf(){
+	public void testPiaf() {
 		p = new Parabole();
-		if(!p.getPiaf().equals(new Piaf(0, 0, new Point(0, 0)))){
+		if (!p.getPiaf().equals(new Piaf(0, 0, new Point(0, 0)))) {
 			fail("Piaf différents");
+		}
+	}
+
+	/**
+	 * Test de la fonction go de parabole
+	 */
+	@Test
+	public void testGo() {
+		p = new Parabole();
+		p.go();
+		if(p.getObstacles().isEmpty() || p.getCourbe().isEmpty()){
+			fail("erreur à l'initialisation");
 		}
 	}
 }

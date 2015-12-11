@@ -8,7 +8,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -70,9 +72,14 @@ public class Frame implements Observer {
    */
   public void afficherCourbe(List<Point> courbe, Color c) {
     Graphics g = panel.getGraphics();
+    Graphics2D g2 = (Graphics2D)g;
+    RenderingHints rh = new RenderingHints(
+            RenderingHints.KEY_TEXT_ANTIALIASING,
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+   g2.setRenderingHints(rh);
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
-        g.fillOval(courbe.get(i).x - (5 / 2), courbe.get(i).y - (5 / 2), 5, 5);
+        g2.fillOval(courbe.get(i).x - (5 / 2), courbe.get(i).y - (5 / 2), 5, 5);
 
       }
     }
@@ -95,11 +102,16 @@ public class Frame implements Observer {
    */
   public void afficherObstacles(List<Obstacle> obs) {
     Graphics g = panel.getGraphics();
+    Graphics2D g2 = (Graphics2D)g;
+    RenderingHints rh = new RenderingHints(
+             RenderingHints.KEY_TEXT_ANTIALIASING,
+             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+    g2.setRenderingHints(rh);
     for (Obstacle obstacle : obs) {
       // new AfficherObstacle(frame.getGraphics(), obstacle, obstacle.getSize(), obstacle.getC());
-      g.setColor(obstacle.getC());
-      g.fillOval(obstacle.x - (15 / 2), obstacle.y - (15 / 2), 15, 15);
-      g.setColor(Color.white);
+      g2.setColor(obstacle.getC());
+      g2.fillOval(obstacle.x - (15 / 2), obstacle.y - (15 / 2), 15, 15);
+      g2.setColor(Color.white);
     }
   }
 

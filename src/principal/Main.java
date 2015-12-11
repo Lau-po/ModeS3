@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import resources.Constants;
+
 import modele.Bezier;
 import modele.ObservableModele;
 import modele.Parabole;
@@ -35,7 +37,7 @@ public class Main {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (cpt < 10) {
+        if (cpt < Constants.NBR_SIMULATION) {
           f.restartSimulation();
           cpt++;
         } else {

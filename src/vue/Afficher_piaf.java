@@ -9,7 +9,9 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -31,16 +33,21 @@ public class Afficher_piaf extends JPanel {
   public Afficher_piaf(Graphics g, Piaf coord, Color color) {
     super();
     // TODO afficher un piaf blanc aux anciennes coord puis afficher un point pour la courbe
-    g.setColor(Color.white);
-    g.fillRect(0, 0, 1000, 1000);
-    g.setColor(Color.black);
-    g.fillPolygon(new int[] {coord.x, coord.x, coord.getBec().getPointe().x}, new int[] {
+    Graphics2D g2 = (Graphics2D)g;
+    RenderingHints rh = new RenderingHints(
+             RenderingHints.KEY_TEXT_ANTIALIASING,
+             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+    g2.setRenderingHints(rh);
+    g2.setColor(Color.white);
+    g2.fillRect(0, 0, 1000, 1000);
+    g2.setColor(Color.black);
+    g2.fillPolygon(new int[] {coord.x, coord.x, coord.getBec().getPointe().x}, new int[] {
         coord.y + 8, coord.y - 8, coord.getBec().getPointe().y}, 3);
-    Color c = g.getColor();
+    Color c = g2.getColor();
     this.coord = coord;
-    g.setColor(color);
-    g.fillOval(coord.x - (20 / 2), coord.y - (20 / 2), 20, 20);
-    g.setColor(c);
+    g2.setColor(color);
+    g2.fillOval(coord.x - (20 / 2), coord.y - (20 / 2), 20, 20);
+    g2.setColor(c);
   }
 
   /**

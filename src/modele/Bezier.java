@@ -55,7 +55,7 @@ public class Bezier extends ObservableModele {
 			setChanged();
 			notifyObservers();
 			try {
-				Thread.sleep(5);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

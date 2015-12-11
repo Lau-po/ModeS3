@@ -8,7 +8,9 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -41,9 +43,14 @@ public class AfficherPoint extends JPanel {
     super();
     Color c = g.getColor();
     this.coord = coord;
-    g.setColor(color);
-    g.fillOval(coord.x - (taille / 2), coord.y - (taille / 2), taille, taille);
-    g.setColor(c);
+    Graphics2D g2 = (Graphics2D)g;
+    RenderingHints rh = new RenderingHints(
+             RenderingHints.KEY_TEXT_ANTIALIASING,
+             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+    g2.setRenderingHints(rh);
+    g2.setColor(color);
+    g2.fillOval(coord.x - (taille / 2), coord.y - (taille / 2), taille, taille);
+    g2.setColor(c);
   }
 
   /**

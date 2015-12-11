@@ -12,7 +12,7 @@ import org.junit.Test;
 public class ObstacleTest {
 	Obstacle O;
 
-	/*
+	/**
 	 * Setting up tests before testing all other one
 	 */
 	@Before
@@ -20,7 +20,7 @@ public class ObstacleTest {
 		O = new Obstacle(50, 55, 10);
 	}
 
-	/*
+	/**
 	 * Test size of the Obstacle
 	 */
 	@Test
@@ -28,7 +28,7 @@ public class ObstacleTest {
 		assertEquals(10, O.getSize());
 	}
 	
-	/*
+	/**
 	 * Test if GetY is right
 	 */
 	@Test
@@ -37,7 +37,7 @@ public class ObstacleTest {
 	}
 	
 	
-	/*
+	/**
 	 * Test if GetC is right
 	 */
 	@Test
@@ -47,7 +47,7 @@ public class ObstacleTest {
 		}
 	}
 
-	/*
+	/**
 	 * Test if GetX is right
 	 */
 	@Test
@@ -55,6 +55,9 @@ public class ObstacleTest {
 		assertEquals(50, O.getX(),0);
 	}
 	
+	/**
+	 * Vérifie la collision avec les l'obstables
+	 */
 	@Test
 	public void testTouched() {
 		boolean tmp = O.isTouched();
@@ -63,7 +66,9 @@ public class ObstacleTest {
 		O.setTouched(tmp);
 	}
 	
-	
+	/**
+	 * Vérifie si les Obstacles se déplacent normalement
+	 */
 	@Test
 	public void testMove() {
 		O.move(20, 20);

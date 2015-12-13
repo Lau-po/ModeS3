@@ -9,11 +9,16 @@ import modele.Piaf;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de test relatif à l'oiseau (ici Piaf)
+ * 
+ * @author Groupe N5
+ */
 public class PiafTest {
 	Piaf p;
 	
 	/**
-	 * Setting up tests
+	 * Mise en place de l'objet test
 	 */
 	@Before
 	public void setUp(){
@@ -21,7 +26,7 @@ public class PiafTest {
 	}
 	
 	/**
-	 * Verifie la réponse de GetX
+	 * Verifie la reponse de GetX
 	 */
 	@Test
 	public void testGetX(){
@@ -29,7 +34,7 @@ public class PiafTest {
 	}
 	
 	/**
-	 * Vérifie la réponse de getY()
+	 * Verifie la reponse de getY()
 	 */
 	@Test
 	public void testGetY(){
@@ -43,30 +48,30 @@ public class PiafTest {
 	public void testMove() {
 		p.move(15, 20, new Point(20,20));
 		if(p.getX() != 15.00){
-			fail("X différent de la valeur attendue");
+			fail("X diffÃ©rent de la valeur attendue");
 		}
 		if(p.getY() != 20.00){
-			fail("Y différent de la valeur attendue");
+			fail("Y diffÃ©rent de la valeur attendue");
 		}
 	}
 	
 	/**
-	 * Vérifie si la détection de collision fonctionne
+	 * Verifie si la detection de collision fonctionne
 	 */
 	@Test
 	public void testTouched(){
 		if(p.isTouched()){
-			fail("Le piaf ne devrai pas être touché");			
+			fail("Le piaf ne devrai pas Ãªtre touchÃ©");			
 		}
 		p.setTouched(true);
 		if(!p.isTouched()){
-			fail("Le piaf devrai être touché");			
+			fail("Le piaf devrai Ãªtre touchÃ©");			
 		}
 	}
 	
 
 	/**
-	 * Vérifie si le bec est bien retourné
+	 * Verifie si le bec est bien retourne
 	 */
 	@Test
 	public void testGetBec(){

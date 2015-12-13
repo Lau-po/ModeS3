@@ -11,11 +11,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import resources.Constants;
-
-import modele.Bezier;
+import modele.Gravite;
 import modele.ObservableModele;
-import modele.Parabole;
+import resources.Constants;
 import vue.Frame;
 import controller.Controller;
 
@@ -27,8 +25,9 @@ public class Main {
    * @param args
    */
   public static void main(String[] args) {
-    ObservableModele m = new Bezier(0.002);
-    //ObservableModele m = new Parabole(1);
+    // OservableModele m = new Bezier(0.002);
+    // ObservableModele m = new Parabole(1);
+    ObservableModele m = new Gravite();
     final Frame f = new Frame(m, new Controller());
     f.startSimulation();
 

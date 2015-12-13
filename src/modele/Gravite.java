@@ -1,14 +1,15 @@
 package modele;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 
 public class Gravite extends ObservableModele {
 
   private double g = 9.81;
-  private double dt = 0.001;
+  private double dt = 0.01;
   private double[] position = new double[] {0.0, 0.0};
-  private double[] vitesse = new double[] {1.0, 100.0};
+  private double[] vitesse = new double[] {50.0, 50.0};
 
   public Gravite() {
     super();
@@ -18,7 +19,7 @@ public class Gravite extends ObservableModele {
 
   @Override
   public void go() {
-    for (int i = 0; i < 100000000; i++) {
+    for (int i = 0; i < 100000000 && !collision && position[1] >= 0; i++) {
       acceleration();
       deplacement();
       courbe.add(new Point((int) position[0], (int) position[1]));
@@ -29,8 +30,11 @@ public class Gravite extends ObservableModele {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-
+    courbe = new ArrayList<Point>();
+    obstacles = new ArrayList<>();
+    position = new double[] {0.0, 0.0};
+    vitesse = new double[] {50.0, 50.0};
+    genObstacles();
   }
 
   private void acceleration() {

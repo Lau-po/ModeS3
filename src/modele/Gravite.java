@@ -9,7 +9,7 @@ public class Gravite extends ObservableModele {
   private double g = 9.81;
   private double dt = 0.01;
   private double[] position = new double[] {0.0, 0.0};
-  private double[] vitesse = new double[] {50.0, 50.0};
+  private double[] vitesse = new double[] {50.0, 75.0};
 
   public Gravite() {
     super();
@@ -19,7 +19,7 @@ public class Gravite extends ObservableModele {
 
   @Override
   public void go() {
-    for (int i = 0; i < 100000000 && !collision && position[1] >= 0; i++) {
+    while (!collision && position[1] >= 0) {
       acceleration();
       deplacement();
       courbe.add(new Point((int) position[0], (int) position[1]));

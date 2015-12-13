@@ -2,20 +2,21 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import modele.Bezier;
 
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de test relatif à la courbe de bezier
+ * @author Inconnu
+ *
+ */
 public class BezierTest {
 	Bezier bezier;
 
 	/**
-	 * Setting up tests
+	 * Mise en place du test
 	 */
 	@Before
 	public void setUp() {
@@ -23,18 +24,18 @@ public class BezierTest {
 	}
 
 	/**
-	 * Vérification du remplissage ds valeurs
+	 * Verification du remplissage ds valeurs
 	 */
 	@Test
 	public void testGo() {
 		bezier.go();
 		if (bezier.getCourbe().isEmpty() && bezier.getObstacles().isEmpty()) {
-			fail("Liste non renseignées");
+			fail("Liste non renseignÃ©es");
 		}
 	}
 
 	/**
-	 * Vérification du reset des valeurs
+	 * Verification du reset des valeurs
 	 */
 	@Test
 	public void testReset() {
@@ -43,9 +44,7 @@ public class BezierTest {
 		bezier.reset();
 
 		if (!bezier.getCourbe().isEmpty() && !bezier.getObstacles().isEmpty()) {
-			fail("Les listes ne sont pas remise à 0");
+			fail("Les listes ne sont pas remise Ã  0");
 		}
-
 	}
-
 }

@@ -5,10 +5,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Classe de test pour le Bec
+ *
+ * @author Groupe N5
+ */
+
 public class BecTest {
  
 	/**
-	 * Vérifie la réponse de GetPointeX
+	 * Verifie la reponse de GetPointeX
 	 */
 	@Test
 	public void testGetPointeX() {
@@ -17,7 +23,7 @@ public class BecTest {
 	}
 	
 	/**
-	 * Vérifie la réponse de GetPointY
+	 * Verifie la reponse de GetPointY
 	 */
 	@Test
 	public void testGetPointeY() {
@@ -26,7 +32,7 @@ public class BecTest {
 	}
 	
 	/**
-	 * Vérifie si SetPointe fonctionne
+	 * Verifie si SetPointe fonctionne
 	 */
 	@Test
 	public void testSetPointe() {
@@ -35,5 +41,4 @@ public class BecTest {
 		assertEquals(15.00, testBec.getPointe().getX(),00.00);
 		assertEquals(20.00, testBec.getPointe().getY(),00.00);
 	}
-
 }

@@ -9,11 +9,16 @@ import modele.Obstacle;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de test sur les obstacles
+ *
+ * @author Groupe N5
+ */
 public class ObstacleTest {
 	Obstacle O;
 
 	/**
-	 * Setting up tests before testing all other one
+	 * Mise en place de l'objet testé
 	 */
 	@Before
 	public void setUp() {
@@ -21,7 +26,7 @@ public class ObstacleTest {
 	}
 
 	/**
-	 * Test setter and getter size of the Obstacle
+	 * Test du getter Size
 	 */
 	@Test
 	public void testSize() {
@@ -30,7 +35,7 @@ public class ObstacleTest {
 	}
 	
 	/**
-	 * Test if GetY is right
+	 * Test du getter Y
 	 */
 	@Test
 	public void testGetY() {
@@ -39,7 +44,7 @@ public class ObstacleTest {
 	
 
 	/**
-	 * Test if GetX is right
+	 * Test du getter X
 	 */
 	@Test
 	public void testGetX() {
@@ -47,7 +52,7 @@ public class ObstacleTest {
 	}
 	
 	/**
-	 * Vérifie la collision avec les l'obstables
+	 * Verifie la collision avec les l'obstables
 	 */
 	@Test
 	public void testTouched() {
@@ -58,7 +63,7 @@ public class ObstacleTest {
 	}
 	
 	/**
-	 * Vérifie si les Obstacles se déplacent normalement
+	 * Verifie si les Obstacles se deplacent normalement
 	 */
 	@Test
 	public void testMove() {
@@ -70,7 +75,7 @@ public class ObstacleTest {
 	}
 	
 	/**
-	 * Test le paramétrage de la couleur
+	 * Test le parametrage de la couleur
 	 */
 	@Test
 	public void testColor(){
@@ -81,12 +86,11 @@ public class ObstacleTest {
 	}
 	
 	/**
-	 * Test le paramétrage de la mobilité de l'obstacle
+	 * Test le parametrage de la mobilite de l'obstacle
 	 */
 	@Test
 	public void testMobilite(){
 		O.setBougeant(true);
 		assertTrue(O.isBougeant());
 	}
-	
 }

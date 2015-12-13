@@ -10,11 +10,16 @@ import modele.Piaf;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de test sur la courbe de type parabole
+ *
+ * @author Groupe N5
+ */
 public class ParaboleTest {
 	Parabole p;
 
 	/**
-	 * Setting up tests
+	 * Mise en place de l'objet test
 	 */
 	@Before
 	public void setUp() {
@@ -51,7 +56,7 @@ public class ParaboleTest {
 	public void testPiaf() {
 		p = new Parabole();
 		if (!p.getPiaf().equals(new Piaf(0, 0, new Point(0, 0)))) {
-			fail("Piaf différents");
+			fail("Piaf diffÃ©rents");
 		}
 	}
 
@@ -63,7 +68,7 @@ public class ParaboleTest {
 		p = new Parabole();
 		p.go();
 		if(p.getObstacles().isEmpty() || p.getCourbe().isEmpty()){
-			fail("erreur à l'initialisation");
+			fail("erreur Ã  l'initialisation");
 		}
 	}
 }

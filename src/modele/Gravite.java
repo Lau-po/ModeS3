@@ -11,9 +11,9 @@ public class Gravite extends ObservableModele {
   /** pas de la simulation */
   private double dt = 0.01;
   /** vecteur position */
-  private double[] position = new double[] {0.0, 0.0};
+  private double[] position = new double[] {250.0, 250.0};
   /** vecteur vitesse */
-  private double[] vitesse = new double[] {50.0, 75.0};
+  private double[] vitesse = new double[] {0.0, 0.0};
 
   /**
    * Constructeur de base
@@ -47,6 +47,7 @@ public class Gravite extends ObservableModele {
     position = new double[] {0.0, 0.0};
     vitesse = new double[] {50.0, 75.0};
     genObstacles();
+    collision = false;
   }
 
   /**

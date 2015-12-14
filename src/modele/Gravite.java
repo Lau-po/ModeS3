@@ -28,10 +28,14 @@ public class Gravite extends ObservableModele {
    */
   @Override
   public void go() {
-    while (!collision && position[1] >= 0) {
+    while (/* !collision && */position[1] >= 0) {
       acceleration();
       deplacement();
       courbe.add(new Point((int) position[0], (int) position[1]));
+      if (collision) {
+        collision = false;
+        vitesse = new double[] {-10.0, 0.0};
+      }
       setChanged();
       notifyObservers();
     }

@@ -36,6 +36,7 @@ public class Controller {
 		Point point = courbe.get(courbe.size() - 1);
 		for (int i = 0; i < obstacles.size(); i++) {
 			o = obstacles.get(i);
+			o.move();
 			if (!o.isTouched()) {
 				if (point.getX() - 20 / 2 < o.getX() + (o.getSize() / 2)
 						&& point.getX() + 20 / 2 > o.getX() - (o.getSize()) / 2) {

@@ -41,16 +41,26 @@ public class Obstacle extends Point {
 	 * Bouge l'obstacle
 	 */
 	public void move() {
-		if (bougeant) {
+		if (bougeant && !touched) {
 			int new_x = this.x;
 			int new_y = this.y;
 
 			// TODO switch pr direction sur var a crée
 			new_x--;
-			new_y--;
+			//new_y--;
 
 			super.move(new_x, new_y);
 		}
+		if (touched) {
+		  int new_x = this.x;
+          int new_y = this.y;
+
+          // TODO switch pr direction sur var a crée
+          new_x++;
+          new_y--;
+
+          super.move(new_x, new_y);
+        }
 	}
 
 	/**

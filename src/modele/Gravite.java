@@ -11,10 +11,12 @@ public class Gravite extends ObservableModele {
   /** pas de la simulation */
   private double dt = 0.01;
   /** vecteur position */
-  private double[] position = new double[] {250.0, 100250.0};
+  private double[] position = new double[] {250.0, 250.0};
   /** vecteur vitesse */
   private double[] vitesse = new double[] {0.0, 0.0};
   private double k = 0.001;
+  private double poidsOiseau = 50.0;
+  private double poidsObstacle = 250.0;
 
   /**
    * Constructeur de base
@@ -33,12 +35,17 @@ public class Gravite extends ObservableModele {
       acceleration();
       deplacement();
       try {
-        Thread.sleep(2);
-      } catch (Exception e) {}
+        Thread.sleep(3);
+      } catch (Exception e) {
+      }
       courbe.add(new Point((int) position[0], (int) position[1]));
       if (collision) {
         collision = false;
-        vitesse = new double[] {-10.0, 10.0};
+        double[] vg =
+            new double[] {
+                (poidsOiseau * vitesse[0] + poidsObstacle * 10) / (poidsObstacle + poidsOiseau),
+                (poidsOiseau * vitesse[1] + poidsObstacle * 0) / (poidsObstacle + poidsOiseau)};
+        vitesse = new double[] {2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]};
       }
       setChanged();
       notifyObservers();
@@ -53,7 +60,7 @@ public class Gravite extends ObservableModele {
     courbe = new ArrayList<Point>();
     obstacles = new ArrayList<>();
     position = new double[] {0.0, 0.0};
-    vitesse = new double[] {50.0, 75.0};
+    vitesse = new double[] {75.0, 100.0};
     genObstacles();
     collision = false;
   }

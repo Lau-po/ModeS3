@@ -48,4 +48,6 @@ public interface Modele {
    * @param b la collision
    */
   public void setCollision(boolean b);
+
+  public boolean getCollision();
 }

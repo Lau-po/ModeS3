@@ -51,7 +51,9 @@ public class JeuPanel extends JPanel implements Observer {
   @Override
   public void update(Observable arg0, Object arg1) {
     controller.collision();
-    ((Modele) arg0).getPiaf().setTouched(((ObservableModele) arg0).getCollision());
+    if (arg0 instanceof Modele) {
+      ((Modele) arg0).getPiaf().setTouched(((Modele) arg0).getCollision());
+    }
     repaint();
   }
 

@@ -19,6 +19,7 @@ public class Gravite extends ObservableModele implements ActionListener {
   /** vecteur vitesse */
   private double[] vitesse = new double[] {0.0, 0.0};
   private double k = 0.001;
+  private double kObstacles = 0.001;
   private double poidsOiseau = 50.0;
   private double poidsObstacle = 150.0;
   private Timer t;
@@ -43,17 +44,23 @@ public class Gravite extends ObservableModele implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (position[1] >= 0) {
+      for (Obstacle obstacle : obstacles) {
+        acceleration(obstacle);
+        deplacement(obstacle);
+        // obstacle.setPosition(obstacle.getPosition()[0], inverse((int)
+        // obstacle.getPosition()[1]));
+      }
       acceleration();
       deplacement();
       courbe.add(new Point((int) position[0], inverse((int) position[1])));
-      if (collision) {
-        collision = false;
-        double[] vg =
-            new double[] {
-                (poidsOiseau * vitesse[0] + poidsObstacle * -5) / (poidsObstacle + poidsOiseau),
-                (poidsOiseau * vitesse[1] + poidsObstacle * 0) / (poidsObstacle + poidsOiseau)};
-        vitesse = new double[] {2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]};
-      }
+      // if (collision) {
+      // collision = false;
+      // double[] vg =
+      // new double[] {
+      // (poidsOiseau * vitesse[0] + poidsObstacle * -5) / (poidsObstacle + poidsOiseau),
+      // (poidsOiseau * vitesse[1] + poidsObstacle * 0) / (poidsObstacle + poidsOiseau)};
+      // vitesse = new double[] {2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]};
+      // }
       setChanged();
       notifyObservers();
       done = false;
@@ -61,6 +68,23 @@ public class Gravite extends ObservableModele implements ActionListener {
       done = true;
       t.stop();
     }
+  }
+
+  public double[] getVitesse() {
+    return vitesse;
+  }
+
+  public void setVitesse(double x, double z) {
+    vitesse[0] = x;
+    vitesse[1] = z;
+  }
+
+  public double getPoidsObstacle() {
+    return poidsObstacle;
+  }
+
+  public double getPoidsOiseau() {
+    return poidsOiseau;
   }
 
   /**
@@ -107,8 +131,37 @@ public class Gravite extends ObservableModele implements ActionListener {
     position[1] = z;
   }
 
-  private int inverse(int y) {
+  private void acceleration(Obstacle obstacle) {
+    double dx = obstacle.getVitesse()[0];
+    double dz = obstacle.getVitesse()[1];
+    if (obstacle.getMoveZ()) {
+      dz = dz + dt * (-g);
+    }
+    if (obstacle.isTouched()) {
+      // subit les frottements de l'air
+      dz -= kObstacles * obstacle.getVitesse()[1];
+      dx -= kObstacles * obstacle.getVitesse()[0];
+    }
+    obstacle.setVitesse(dx, dz);
+  }
+
+  private void deplacement(Obstacle obstacle) {
+    double x = obstacle.getPosition()[0];
+    double z = obstacle.getPosition()[1];
+    double dx = obstacle.getVitesse()[0];
+    double dz = obstacle.getVitesse()[1];
+    if (obstacle.getMoveX()) {
+      x = x + dx * dt;
+    }
+    if (obstacle.getMoveZ()) {
+      z = z + dz * dt;
+    }
+    obstacle.setPosition(x, z);
+  }
+
+  public int inverse(int y) {
     return -y + 470;
+    // return y;
   }
 
   public void setK(double d) {

@@ -69,6 +69,7 @@ public abstract class ObservableModele extends Observable implements Modele {
     this.collision = b;
   }
 
+  @Override
   public boolean getCollision() {
     return collision;
   }
@@ -78,7 +79,7 @@ public abstract class ObservableModele extends Observable implements Modele {
    */
   void genObstacles() {
     Random random = new Random();
-    int nb = random.nextInt(5) + 5;
+    int nb = random.nextInt(5) + 10;
     int x;
     int y;
     for (int i = 0; i < nb; i++) {

@@ -1,11 +1,11 @@
-package modele;
+package vue;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
-import vue.JeuPanel;
+import modele.ObservableModele;
 import controller.Controller;
 
 public class Jeu extends JFrame {

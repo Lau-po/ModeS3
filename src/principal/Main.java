@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import modele.Gravite;
-import modele.Jeu;
 import modele.ObservableModele;
 import resources.Constants;
+import vue.Jeu;
 import controller.Controller;
 
 public class Main {

@@ -72,7 +72,18 @@ public class JeuPanel extends JPanel implements Observer {
     List<Obstacle> obs = modele.getObstacles();
     for (Obstacle obstacle : obs) {
       g.setColor(obstacle.getC());
-      g.fillOval(obstacle.x - (15 / 2), obstacle.y - (15 / 2), 15, 15);
+      if (modele instanceof Gravite) {
+        if (obstacle.isTouched()) {
+          g.fillOval((int) obstacle.getPosition()[0] - (15 / 2),
+              ((Gravite) modele).inverse((int) obstacle.getPosition()[1] - (15 / 2)), 15, 15);
+        } else {
+          g.fillOval((int) obstacle.getPosition()[0] - (15 / 2), (int) obstacle.getPosition()[1]
+              - (15 / 2), 15, 15);
+        }
+      } else {
+        g.fillOval((int) obstacle.getPosition()[0] - (15 / 2), (int) obstacle.getPosition()[1]
+            - (15 / 2), 15, 15);
+      }
       g.setColor(Color.white);
     }
     revalidate();

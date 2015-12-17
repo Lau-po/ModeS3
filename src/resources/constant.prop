@@ -1,3 +1,7 @@
 #AngryPiaf Properties
 pas=0.001
 nbrSimul=10
+k=0.001
+poidsOiseau=50.0
+poidsObstacle=150.0
+g=9.81

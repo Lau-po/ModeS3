@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import modele.Gravite;
 import modele.Modele;
 import modele.ObservableModele;
 import modele.Obstacle;
@@ -34,8 +37,16 @@ public class JeuPanel extends JPanel implements Observer {
     this(layout, doubleBuffer);
     this.modele = modele;
     this.controller = controller;
+    addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        System.out.println("mouse clicked");
+        if (modele instanceof Gravite) {
+          ((Gravite) modele).setK(((Gravite) modele).getK() * 10);
+        }
+      }
+    });
   }
-
 
   @Override
   public void update(Observable arg0, Object arg1) {

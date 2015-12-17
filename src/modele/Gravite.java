@@ -75,6 +75,7 @@ public class Gravite extends ObservableModele implements ActionListener {
     genObstacles();
     collision = false;
     done = false;
+    k = 0.001;
   }
 
   /**
@@ -110,5 +111,12 @@ public class Gravite extends ObservableModele implements ActionListener {
     return -y + 470;
   }
 
+  public void setK(double d) {
+    this.k = d;
+  }
+
+  public double getK() {
+    return k;
+  }
 
 }

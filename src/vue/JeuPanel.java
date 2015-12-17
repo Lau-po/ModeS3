@@ -65,7 +65,10 @@ public class JeuPanel extends JPanel implements Observer {
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
         g.setColor(Color.black);
-        g.fillOval(courbe.get(i).x - (5 / 2), courbe.get(i).y - (5 / 2), 5, 5);
+        if (modele instanceof Gravite) {
+          g.fillOval(courbe.get(i).x - (5 / 2), ((Gravite) modele).inverse(courbe.get(i).y)
+              - (5 / 2), 5, 5);
+        }
         g.setColor(Color.white);
       }
     }
@@ -73,13 +76,8 @@ public class JeuPanel extends JPanel implements Observer {
     for (Obstacle obstacle : obs) {
       g.setColor(obstacle.getC());
       if (modele instanceof Gravite) {
-        if (obstacle.isTouched()) {
-          g.fillOval((int) obstacle.getPosition()[0] - (15 / 2),
-              ((Gravite) modele).inverse((int) obstacle.getPosition()[1] - (15 / 2)), 15, 15);
-        } else {
-          g.fillOval((int) obstacle.getPosition()[0] - (15 / 2), (int) obstacle.getPosition()[1]
-              - (15 / 2), 15, 15);
-        }
+        g.fillOval((int) obstacle.getPosition()[0] - (15 / 2),
+            ((Gravite) modele).inverse((int) obstacle.getPosition()[1]) - (15 / 2), 15, 15);
       } else {
         g.fillOval((int) obstacle.getPosition()[0] - (15 / 2), (int) obstacle.getPosition()[1]
             - (15 / 2), 15, 15);

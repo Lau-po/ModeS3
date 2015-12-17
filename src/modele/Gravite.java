@@ -15,9 +15,9 @@ public class Gravite extends ObservableModele implements ActionListener {
   /** pas de la simulation */
   private double dt = 0.01;
   /** vecteur position */
-  private double[] position = new double[] {250.0, 250.0};
+  private double[] position = new double[] {0.0, 0.0};
   /** vecteur vitesse */
-  private double[] vitesse = new double[] {0.0, 0.0};
+  private double[] vitesse = new double[] {90.0, 100.0};
   private double k = 0.001;
   private double kObstacles = 0.001;
   private double poidsOiseau = 50.0;
@@ -52,7 +52,7 @@ public class Gravite extends ObservableModele implements ActionListener {
       }
       acceleration();
       deplacement();
-      courbe.add(new Point((int) position[0], inverse((int) position[1])));
+      courbe.add(new Point((int) position[0], (int) position[1]));
       // if (collision) {
       // collision = false;
       // double[] vg =
@@ -95,7 +95,7 @@ public class Gravite extends ObservableModele implements ActionListener {
     courbe = new ArrayList<Point>();
     obstacles = new ArrayList<>();
     position = new double[] {0.0, 0.0};
-    vitesse = new double[] {75.0, 100.0};
+    vitesse = new double[] {90.0, 100.0};
     genObstacles();
     collision = false;
     done = false;

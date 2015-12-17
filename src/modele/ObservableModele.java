@@ -22,6 +22,7 @@ public abstract class ObservableModele extends Observable implements Modele {
   protected boolean collision;
   /** l'oiseau */
   protected Piaf oiseau;
+  public boolean done = false;
 
   /**
    * Construit un modele observable
@@ -90,6 +91,7 @@ public abstract class ObservableModele extends Observable implements Modele {
   /**
    * @see Modele
    */
+  @Override
   public Piaf getPiaf() {
     return oiseau;
   }

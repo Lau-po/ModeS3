@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import modele.Gravite;
+import modele.Jeu;
 import modele.ObservableModele;
 import resources.Constants;
-import vue.Frame;
 import controller.Controller;
 
 public class Main {
@@ -25,10 +25,11 @@ public class Main {
    * @param args
    */
   public static void main(String[] args) {
-    // OservableModele m = new Bezier(0.002);
+    // ObservableModele m = new Bezier(0.002);
     // ObservableModele m = new Parabole(1);
     ObservableModele m = new Gravite();
-    final Frame f = new Frame(m, new Controller());
+    // final Frame f = new Frame(m, new Controller());
+    final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
 
     ActionListener al = new ActionListener() {
@@ -36,11 +37,13 @@ public class Main {
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        if (cpt < Constants.NBR_SIMULATION) {
-          f.restartSimulation();
+        if (m.done) {
           cpt++;
-        } else {
-          System.exit(0);
+          if (cpt < Constants.NBR_SIMULATION) {
+            f.restartSimulation();
+          } else {
+            System.exit(0);
+          }
         }
       }
     };

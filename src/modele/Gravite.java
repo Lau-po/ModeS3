@@ -1,12 +1,14 @@
 package modele;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import sun.net.www.content.audio.x_aiff;
+import javax.swing.Timer;
 
 
-public class Gravite extends ObservableModele {
+public class Gravite extends ObservableModele implements ActionListener {
 
   /** Constate gravitationnel */
   private double g = 9.81;
@@ -19,6 +21,7 @@ public class Gravite extends ObservableModele {
   private double k = 0.001;
   private double poidsOiseau = 50.0;
   private double poidsObstacle = 150.0;
+  private Timer t;
 
   /**
    * Constructeur de base
@@ -33,13 +36,15 @@ public class Gravite extends ObservableModele {
    */
   @Override
   public void go() {
-    while (/* !collision && */position[1] >= 0) {
+    t = new Timer(1, this);
+    t.start();
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (position[1] >= 0) {
       acceleration();
       deplacement();
-      try {
-        Thread.sleep(2);
-      } catch (Exception e) {
-      }
       courbe.add(new Point((int) position[0], inverse((int) position[1])));
       if (collision) {
         collision = false;
@@ -51,6 +56,10 @@ public class Gravite extends ObservableModele {
       }
       setChanged();
       notifyObservers();
+      done = false;
+    } else {
+      done = true;
+      t.stop();
     }
   }
 
@@ -65,6 +74,7 @@ public class Gravite extends ObservableModele {
     vitesse = new double[] {75.0, 100.0};
     genObstacles();
     collision = false;
+    done = false;
   }
 
   /**
@@ -90,7 +100,8 @@ public class Gravite extends ObservableModele {
     double dz = vitesse[1];
     x = x + dx * dt;
     z = z + dz * dt;
-    System.out.println("dx : " + dx + " dz : " + dz);
+    // System.out.println("dx : " + dx + " dz : " + dz);
+    // System.out.println("x : " + x + " z : " + z);
     position[0] = x;
     position[1] = z;
   }

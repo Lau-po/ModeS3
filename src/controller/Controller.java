@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Observer;
 
-import modele.Gravite;
 import modele.Modele;
 import modele.Obstacle;
 
@@ -33,7 +32,7 @@ public class Controller {
   public void collision() {
     this.courbe = modele.getCourbe();
     this.obstacles = modele.getObstacles();
-    Obstacle o;
+    Obstacle o, o2;
     Point point = courbe.get(courbe.size() - 1);
     for (int i = 0; i < obstacles.size(); i++) {
       o = obstacles.get(i);
@@ -46,19 +45,21 @@ public class Controller {
             System.out.println("collision");
             o.setTouched(true);
             modele.setCollision(true);
-            if (modele instanceof Gravite) {
-              double poidsOiseau = ((Gravite) modele).getPoidsOiseau();
-              double poidsObstacle = ((Gravite) modele).getPoidsObstacle();
-              double[] vModele = ((Gravite) modele).getVitesse();
-              double[] vObstacle = o.getVitesse();
-              double[] vg =
-                  new double[] {
-                      (poidsOiseau * vModele[0] + poidsObstacle * vObstacle[0])
-                          / (poidsObstacle + poidsOiseau),
-                      (poidsOiseau * vModele[1] + poidsObstacle * vObstacle[1])
-                          / (poidsObstacle + poidsOiseau)};
-              ((Gravite) modele).setVitesse(2 * vg[0] - vModele[0], 2 * vg[1] - vModele[1]);
-              o.setVitesse(2 * vg[0] - vObstacle[0], 2 * vg[1] - vModele[1]);
+            modele.collision(o);
+          }
+        }
+      } else {
+        for (int j = 0; j < obstacles.size(); j++) {
+          if (i != j) {
+            o2 = obstacles.get(j);
+            if ((o.getX() - o.getSize() / 2 < o2.getX() + o2.getSize() / 2)
+                && (o.getX() + o.getSize() / 2 > o2.getX() - o2.getSize() / 2)) {
+              if ((o.getY() - o.getSize() / 2 < o2.getY() + o2.getSize() / 2)
+                  && (o.getY() + o.getSize() / 2 > o2.getY() - o2.getSize() / 2)) {
+                System.out.println("collision entre 2 obstacles");
+                o2.setTouched(true);
+                modele.collision(o, o2);
+              }
             }
           }
         }

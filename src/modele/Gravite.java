@@ -47,8 +47,6 @@ public class Gravite extends ObservableModele implements ActionListener {
       for (Obstacle obstacle : obstacles) {
         acceleration(obstacle);
         deplacement(obstacle);
-        // obstacle.setPosition(obstacle.getPosition()[0], inverse((int)
-        // obstacle.getPosition()[1]));
       }
       acceleration();
       deplacement();
@@ -63,6 +61,7 @@ public class Gravite extends ObservableModele implements ActionListener {
       // }
       setChanged();
       notifyObservers();
+      checkIfDone();
       done = false;
     } else {
       done = true;
@@ -170,6 +169,34 @@ public class Gravite extends ObservableModele implements ActionListener {
 
   public double getK() {
     return k;
+  }
+
+  private void checkIfDone() {
+
+  }
+
+  @Override
+  public void collision(Obstacle o) {
+    double[] vg =
+        new double[] {
+            (poidsOiseau * vitesse[0] + poidsObstacle * o.getVitesse()[0])
+                / (poidsObstacle + poidsOiseau),
+            (poidsOiseau * vitesse[1] + poidsObstacle * o.getVitesse()[1])
+                / (poidsObstacle + poidsOiseau)};
+    setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
+    o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1] - o.getVitesse()[1]);
+  }
+
+  @Override
+  public void collision(Obstacle o1, Obstacle o2) {
+    double[] vg =
+        new double[] {
+            (poidsObstacle * o1.getVitesse()[0] + poidsObstacle * o2.getVitesse()[0])
+                / (poidsObstacle + poidsObstacle),
+            (poidsObstacle * o1.getVitesse()[1] + poidsObstacle * o2.getVitesse()[1])
+                / (poidsObstacle + poidsObstacle)};
+    o1.setVitesse(2 * vg[0] - o1.getVitesse()[0], 2 * vg[1] - o1.getVitesse()[1]);
+    o2.setVitesse(2 * vg[0] - o2.getVitesse()[0], 2 * vg[1] - o2.getVitesse()[1]);
   }
 
 }

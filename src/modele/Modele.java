@@ -50,4 +50,8 @@ public interface Modele {
   public void setCollision(boolean b);
 
   public boolean getCollision();
+
+  public void collision(Obstacle o);
+
+  public void collision(Obstacle o1, Obstacle o2);
 }

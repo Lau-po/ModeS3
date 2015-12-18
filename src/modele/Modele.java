@@ -49,9 +49,25 @@ public interface Modele {
    */
   public void setCollision(boolean b);
 
+  /**
+   * renvoie si le modele a subit une collision
+   * 
+   * @return boolean collision
+   */
   public boolean getCollision();
 
+  /**
+   * le modele fait subir une collision entre l'oiseau et l'obstacle
+   * 
+   * @param o l'obstacle avec lequel a eu lieu une collision
+   */
   public void collision(Obstacle o);
 
+  /**
+   * le modele fait subir une collision entre deux obstacles
+   * 
+   * @param o1 le premier obstacle de la collision
+   * @param o2 le deuxieme obstacle de la collision
+   */
   public void collision(Obstacle o1, Obstacle o2);
 }

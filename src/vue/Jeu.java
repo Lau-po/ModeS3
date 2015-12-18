@@ -37,6 +37,9 @@ public class Jeu extends JFrame {
     modele.addObserver(panel);
   }
 
+  /**
+   * demarre la simulation du modele
+   */
   public void startSimulation() {
     System.out.println("\n\nSimulation demarree");
     modele.go();

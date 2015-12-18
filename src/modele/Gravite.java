@@ -18,9 +18,13 @@ public class Gravite extends ObservableModele implements ActionListener {
   private double[] position = new double[] {0.0, 0.0};
   /** vecteur vitesse */
   private double[] vitesse = new double[] {90.0, 100.0};
+  /** coefficients pour les frottements de l'air pour l'oiseau */
   private double k = 0.001;
+  /** coefficients pour les frottements de l'air pour les obstacles */
   private double kObstacles = 0.001;
+  /** poids de l'oiseau */
   private double poidsOiseau = 50.0;
+  /** poids des obstacles */
   private double poidsObstacle = 150.0;
   private Timer t;
 
@@ -51,14 +55,6 @@ public class Gravite extends ObservableModele implements ActionListener {
       acceleration();
       deplacement();
       courbe.add(new Point((int) position[0], (int) position[1]));
-      // if (collision) {
-      // collision = false;
-      // double[] vg =
-      // new double[] {
-      // (poidsOiseau * vitesse[0] + poidsObstacle * -5) / (poidsObstacle + poidsOiseau),
-      // (poidsOiseau * vitesse[1] + poidsObstacle * 0) / (poidsObstacle + poidsOiseau)};
-      // vitesse = new double[] {2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]};
-      // }
       setChanged();
       notifyObservers();
       checkIfDone();
@@ -69,21 +65,9 @@ public class Gravite extends ObservableModele implements ActionListener {
     }
   }
 
-  public double[] getVitesse() {
-    return vitesse;
-  }
-
-  public void setVitesse(double x, double z) {
+  private void setVitesse(double x, double z) {
     vitesse[0] = x;
     vitesse[1] = z;
-  }
-
-  public double getPoidsObstacle() {
-    return poidsObstacle;
-  }
-
-  public double getPoidsOiseau() {
-    return poidsOiseau;
   }
 
   /**
@@ -124,12 +108,15 @@ public class Gravite extends ObservableModele implements ActionListener {
     double dz = vitesse[1];
     x = x + dx * dt;
     z = z + dz * dt;
-    // System.out.println("dx : " + dx + " dz : " + dz);
-    // System.out.println("x : " + x + " z : " + z);
     position[0] = x;
     position[1] = z;
   }
 
+  /**
+   * Calcul la vitesse de proche en proche pour l'obstacle passer en parametre
+   * 
+   * @param obstacle l'obstacle qui doit se deplacer
+   */
   private void acceleration(Obstacle obstacle) {
     double dx = obstacle.getVitesse()[0];
     double dz = obstacle.getVitesse()[1];
@@ -144,6 +131,11 @@ public class Gravite extends ObservableModele implements ActionListener {
     obstacle.setVitesse(dx, dz);
   }
 
+  /**
+   * Calcul la position de proche en proche pour l'obstacle passer en parametre
+   * 
+   * @param obstacle l'obstacle qui doit se deplacer
+   */
   private void deplacement(Obstacle obstacle) {
     double x = obstacle.getPosition()[0];
     double z = obstacle.getPosition()[1];
@@ -158,9 +150,14 @@ public class Gravite extends ObservableModele implements ActionListener {
     obstacle.setPosition(x, z);
   }
 
+  /**
+   * inverse l'axe Y
+   * 
+   * @param y
+   * @return
+   */
   public int inverse(int y) {
     return -y + 470;
-    // return y;
   }
 
   public void setK(double d) {
@@ -171,10 +168,16 @@ public class Gravite extends ObservableModele implements ActionListener {
     return k;
   }
 
+  /**
+   * verifie si la simulation doit se terminer càd si l'oiseau est sur le sol et ne rebondit plus
+   */
   private void checkIfDone() {
 
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void collision(Obstacle o) {
     double[] vg =
@@ -187,6 +190,9 @@ public class Gravite extends ObservableModele implements ActionListener {
     o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1] - o.getVitesse()[1]);
   }
 
+  /**
+   * @see Modele
+   */
   @Override
   public void collision(Obstacle o1, Obstacle o2) {
     double[] vg =

@@ -28,7 +28,6 @@ public class Main {
     // ObservableModele m = new Bezier(0.002);
     // ObservableModele m = new Parabole(1);
     ObservableModele m = new Gravite();
-    // final Frame f = new Frame(m, new Controller());
     final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
 

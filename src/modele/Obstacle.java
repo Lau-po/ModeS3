@@ -39,10 +39,10 @@ public class Obstacle extends Point {
     // this.moveX = new Random().nextBoolean();
     // this.moveZ = new Random().nextBoolean();
     if (moveX) {
-      vitesse[0] = 0.0;
+      vitesse[0] = 10.0;
     }
     if (moveZ) {
-      vitesse[1] = 0.0;
+      vitesse[1] = 10.0;
     }
   }
 
@@ -88,13 +88,20 @@ public class Obstacle extends Point {
    * @param touched
    */
   public void setTouched(boolean touched) {
-    this.touched = touched;
-    if (touched) {
-      c = Color.YELLOW;
-      moveX = true;
-      moveZ = true;
-    } else {
-      c = Color.red;
+    if (!this.touched) {
+      this.touched = touched;
+      if (touched) {
+        Random rd = new Random();
+        if (rd.nextBoolean()) {
+          c = Color.YELLOW;
+        } else {
+          c = Color.blue;
+        }
+        moveX = true;
+        moveZ = true;
+      } else {
+        c = Color.red;
+      }
     }
   }
 

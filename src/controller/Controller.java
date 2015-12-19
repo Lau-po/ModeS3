@@ -34,22 +34,31 @@ public class Controller {
     this.obstacles = modele.getObstacles();
     Obstacle o, o2;
     Point point = courbe.get(courbe.size() - 1);
+    if (collisionSol(point)) {
+      modele.collisionSol();
+    }
     for (int i = 0; i < obstacles.size(); i++) {
       o = obstacles.get(i);
       // o.move();
+      if (collisionSol(o)) {
+        modele.collisionSol(o);
+      }
       if (!o.isTouched()) {
         if (collision(point, o)) {
-          System.out.println("collision");
           o.setTouched(true);
           modele.setCollision(true);
           modele.collision(o);
         }
       } else {
+        if (collision(point, o)) {
+          modele.collision(o);
+        }
         for (int j = 0; j < obstacles.size(); j++) {
           if (i != j) {
             o2 = obstacles.get(j);
             if (collision(o, o2)) {
               o2.setTouched(true);
+              o.setTouched(true);
               modele.collision(o, o2);
             }
           }
@@ -79,6 +88,13 @@ public class Controller {
       return false;
     }
     return true;
+  }
+
+  private boolean collisionSol(Point a) {
+    if (a.getX() < 100) {
+      return false;
+    }
+    return collision(a, new Obstacle((int) a.getX(), 0, 15));
   }
 
   /**

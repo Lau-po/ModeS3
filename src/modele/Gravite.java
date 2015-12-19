@@ -58,11 +58,12 @@ public class Gravite extends ObservableModele implements ActionListener {
       setChanged();
       notifyObservers();
       checkIfDone();
-      done = false;
-    } else {
-      done = true;
-      t.stop();
+      // done = false;
     }
+    // else {
+    // done = true;
+    // t.stop();
+    // }
   }
 
   private void setVitesse(double x, double z) {
@@ -172,7 +173,12 @@ public class Gravite extends ObservableModele implements ActionListener {
    * verifie si la simulation doit se terminer càd si l'oiseau est sur le sol et ne rebondit plus
    */
   private void checkIfDone() {
-
+    if (vitesse[0] > -0.01 && vitesse[0] < 0.01) {
+      if (vitesse[1] > -1 && vitesse[1] < 1) {
+        done = true;
+        t.stop();
+      }
+    }
   }
 
   /**
@@ -203,6 +209,23 @@ public class Gravite extends ObservableModele implements ActionListener {
                 / (poidsObstacle + poidsObstacle)};
     o1.setVitesse(2 * vg[0] - o1.getVitesse()[0], 2 * vg[1] - o1.getVitesse()[1]);
     o2.setVitesse(2 * vg[0] - o2.getVitesse()[0], 2 * vg[1] - o2.getVitesse()[1]);
+  }
+
+  @Override
+  public void collisionSol() {
+    double[] vg =
+        new double[] {(poidsOiseau * vitesse[0]) / (Double.MAX_VALUE),
+            (poidsOiseau * vitesse[1]) / (Double.MAX_VALUE)};
+    setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
+    System.out.println(vitesse[0] + " " + vitesse[1]);
+  }
+
+  @Override
+  public void collisionSol(Obstacle o) {
+    double[] vg =
+        new double[] {(poidsObstacle * o.getVitesse()[0]) / (Double.MAX_VALUE),
+            (poidsObstacle * o.getVitesse()[1]) / (Double.MAX_VALUE)};
+    o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1] - o.getVitesse()[1]);
   }
 
 }

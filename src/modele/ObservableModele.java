@@ -79,12 +79,12 @@ public abstract class ObservableModele extends Observable implements Modele {
    */
   void genObstacles() {
     Random random = new Random();
-    int nb = random.nextInt(5) + 10;
+    int nb = random.nextInt(5) + 50;
     int x;
     int y;
     for (int i = 0; i < nb; i++) {
-      x = random.nextInt(350) + 350 - 30;
-      y = random.nextInt(300) + 30;
+      x = random.nextInt(450) + 350 - 30;
+      y = random.nextInt(400) + 30;
       obstacles.add(new Obstacle(x, y, 15));
     }
   }
@@ -96,5 +96,17 @@ public abstract class ObservableModele extends Observable implements Modele {
   public Piaf getPiaf() {
     return oiseau;
   }
+
+  @Override
+  abstract public void collision(Obstacle o);
+
+  @Override
+  abstract public void collision(Obstacle o1, Obstacle o2);
+
+  @Override
+  abstract public void collisionSol();
+
+  @Override
+  abstract public void collisionSol(Obstacle o);
 
 }

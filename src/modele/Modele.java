@@ -70,4 +70,8 @@ public interface Modele {
    * @param o2 le deuxieme obstacle de la collision
    */
   public void collision(Obstacle o1, Obstacle o2);
+
+  public void collisionSol();
+
+  public void collisionSol(Obstacle o);
 }

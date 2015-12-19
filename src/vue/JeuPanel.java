@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import modele.Gravite;
 import modele.Modele;
@@ -40,9 +41,17 @@ public class JeuPanel extends JPanel implements Observer {
     addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse clicked");
-        if (modele instanceof Gravite) {
-          ((Gravite) modele).setK(((Gravite) modele).getK() * 10);
+        if (SwingUtilities.isLeftMouseButton(e)) {
+          if (modele instanceof Gravite) {
+            ((Gravite) modele).setK(((Gravite) modele).getK() * 10);
+            System.out.println("left click");
+          }
+        }
+        if (SwingUtilities.isRightMouseButton(e)) {
+          if (modele instanceof Gravite) {
+            ((Gravite) modele).setK(((Gravite) modele).getK() / 10);
+            System.out.println("right click");
+          }
         }
       }
     });

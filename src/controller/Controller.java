@@ -38,34 +38,47 @@ public class Controller {
       o = obstacles.get(i);
       // o.move();
       if (!o.isTouched()) {
-        if (point.getX() - 20 / 2 < o.getX() + (o.getSize() / 2)
-            && point.getX() + 20 / 2 > o.getX() - (o.getSize()) / 2) {
-          if (point.getY() - 20 / 2 < o.getY() + (o.getSize() / 2)
-              && point.getY() + 20 / 2 > o.getY() - (o.getSize() / 2)) {
-            System.out.println("collision");
-            o.setTouched(true);
-            modele.setCollision(true);
-            modele.collision(o);
-          }
+        if (collision(point, o)) {
+          System.out.println("collision");
+          o.setTouched(true);
+          modele.setCollision(true);
+          modele.collision(o);
         }
       } else {
         for (int j = 0; j < obstacles.size(); j++) {
           if (i != j) {
             o2 = obstacles.get(j);
-            if ((o.getX() - o.getSize() / 2 < o2.getX() + o2.getSize() / 2)
-                && (o.getX() + o.getSize() / 2 > o2.getX() - o2.getSize() / 2)) {
-              if ((o.getY() - o.getSize() / 2 < o2.getY() + o2.getSize() / 2)
-                  && (o.getY() + o.getSize() / 2 > o2.getY() - o2.getSize() / 2)) {
-                System.out.println("collision entre 2 obstacles");
-                o2.setTouched(true);
-                modele.collision(o, o2);
-              }
+            if (collision(o, o2)) {
+              o2.setTouched(true);
+              modele.collision(o, o2);
             }
           }
         }
       }
     }
 
+  }
+
+  private boolean collision(Point a, Obstacle b) {
+    double r, diffX, diffY, d;
+    if (a instanceof Obstacle) {
+      r = 15 / 2;
+      diffX = ((Obstacle) a).getPosition()[0] - b.getPosition()[0];
+      diffY = ((Obstacle) a).getPosition()[1] - b.getPosition()[1];
+      d = diffX * diffX + diffY * diffY;
+      if (d > (r + 15) * (r + 15)) {
+        return false;
+      }
+      return true;
+    }
+    r = 20 / 2;
+    diffX = a.getX() - b.getPosition()[0];
+    diffY = a.getY() - b.getPosition()[1];
+    d = diffX * diffX + diffY * diffY;
+    if (d > (r + 15) * (r + 15)) {
+      return false;
+    }
+    return true;
   }
 
   /**

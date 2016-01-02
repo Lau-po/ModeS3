@@ -23,17 +23,36 @@ public abstract class ObservableModele extends Observable implements Modele {
   /** l'oiseau */
   protected Piaf oiseau;
   public boolean done = false;
-
+  /** Slingshot */
+  protected Slingshot slingshot;
+  
   /**
    * Construit un modele observable
    */
   public ObservableModele() {
+	slingshot = new Slingshot();
     courbe = new ArrayList<Point>();
     obstacles = new ArrayList<Obstacle>();
     oiseau = new Piaf(0, 0, new Point(0, 0));
   }
 
   /**
+   * Retourne le Slingshot
+   * @return un Slingshot
+   */
+  public Slingshot getSlingshot() {
+	return slingshot;
+  }
+
+  /**
+   * Donne les valeurs de bases au slingshot
+ * @param slingshot
+ */
+public void setSlingshot(Slingshot slingshot) {
+	this.slingshot = slingshot;
+  }
+
+/**
    * @see Modele
    */
   @Override
@@ -108,5 +127,8 @@ public abstract class ObservableModele extends Observable implements Modele {
 
   @Override
   abstract public void collisionSol(Obstacle o);
+  
+  @Override
+  abstract public void launchPad();
 
 }

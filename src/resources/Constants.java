@@ -35,6 +35,17 @@ public class Constants {
      
      public static final int NBR_SIMULATION = Integer.parseInt(props.getProperty("nbrSimul"));
      
+     public static final double PDS_OBSTACLE = Double.parseDouble(props.getProperty("poidsObstacle"));     
+
+     public static final double PDS_OISEAU = Double.parseDouble(props.getProperty("poidsOiseau"));
+          
+     public static final double K = Double.parseDouble(props.getProperty("k"));
+     
+     public static final double K_OBSTACLE = Double.parseDouble(props.getProperty("kObstacle"));
+     
+
+     public static final double GRAVITY = Double.parseDouble(props.getProperty("g"));
+     
      /**
       * Fonction main pour la simulation
       * @param args

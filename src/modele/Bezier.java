@@ -125,4 +125,34 @@ public class Bezier extends ObservableModele {
 		courbe = new ArrayList<>();
 	}
 
+	@Override
+	public void collision(Obstacle o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collision(Obstacle o1, Obstacle o2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collisionSol() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collisionSol(Obstacle o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void launchPad() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

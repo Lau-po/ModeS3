@@ -29,7 +29,7 @@ public interface Modele {
    * @return le piaf
    */
   public Piaf getPiaf();
-
+  
   /**
    * Fonction pour obtenir la liste des obstacles
    * 
@@ -74,4 +74,6 @@ public interface Modele {
   public void collisionSol();
 
   public void collisionSol(Obstacle o);
+
+  public void launchPad();
 }

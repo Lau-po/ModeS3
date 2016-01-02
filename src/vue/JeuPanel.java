@@ -17,6 +17,7 @@ import modele.Gravite;
 import modele.Modele;
 import modele.ObservableModele;
 import modele.Obstacle;
+import modele.Slingshot;
 import controller.Controller;
 
 @SuppressWarnings("serial")
@@ -38,6 +39,8 @@ public class JeuPanel extends JPanel implements Observer {
     this(layout, doubleBuffer);
     this.modele = modele;
     this.controller = controller;
+    addMouseListener(((Gravite) modele).getSlingshot().getCliker());
+    addMouseMotionListener(((Gravite) modele).getSlingshot().getMove());
     addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -70,6 +73,14 @@ public class JeuPanel extends JPanel implements Observer {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+    g.setColor(modele.getSlingshot().getC());
+    if (modele instanceof Gravite) {
+        g.fillOval((int)modele.getSlingshot().getLocation().getX(),((Gravite) modele).inverse((int)modele.getSlingshot().getLocation().getY()),modele.getSlingshot().getSize()[0],(int) modele.getSlingshot().getSize()[1]);
+      }
+    g.setColor(Color.green);
+    if (modele instanceof Gravite) {
+        g.fillOval((int)modele.getSlingshot().getMousePosition()[0],(int)modele.getSlingshot().getMousePosition()[1],10,10);
+    }
     List<Point> courbe = modele.getCourbe();
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {

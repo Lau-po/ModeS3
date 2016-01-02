@@ -23,7 +23,7 @@ import modele.Modele;
 import modele.ObservableModele;
 import modele.Obstacle;
 import modele.Piaf;
-
+import modele.Slingshot;
 import controller.Controller;
 
 public class Frame implements Observer {
@@ -37,7 +37,6 @@ public class Frame implements Observer {
   /** Controleur de la vue */
   private Controller controller;
   private int toto = 0;
-
   /**
    * Constructeur de base
    * 

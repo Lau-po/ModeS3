@@ -11,69 +11,84 @@ import java.util.List;
 
 public interface Modele {
 
-  /**
-   * lance la simulation du modele
-   */
-  public void go();
+	/**
+	 * lance la simulation du modele
+	 */
+	public void go();
 
-  /**
-   * Liste des points de la courbe
-   * 
-   * @return la liste des points de la courbe
-   */
-  public List<Point> getCourbe();
+	/**
+	 * Liste des points de la courbe
+	 * 
+	 * @return la liste des points de la courbe
+	 */
+	public List<Point> getCourbe();
 
-  /**
-   * Fonction pour obtenir l'oiseau
-   * 
-   * @return le piaf
-   */
-  public Piaf getPiaf();
-  
-  /**
-   * Fonction pour obtenir la liste des obstacles
-   * 
-   * @return la liste des obstacles du jeu
-   */
-  public List<Obstacle> getObstacles();
+	/**
+	 * Fonction pour obtenir l'oiseau
+	 * 
+	 * @return le piaf
+	 */
+	public Piaf getPiaf();
 
-  /**
-   * r√©initialise le modele
-   */
-  public void reset();
+	/**
+	 * Fonction pour obtenir la liste des obstacles
+	 * 
+	 * @return la liste des obstacles du jeu
+	 */
+	public List<Obstacle> getObstacles();
 
-  /**
-   * Fonction qui d√©termine si il y a une collision
-   * 
-   * @param b la collision
-   */
-  public void setCollision(boolean b);
+	/**
+	 * r√©initialise le modele
+	 */
+	public void reset();
 
-  /**
-   * renvoie si le modele a subit une collision
-   * 
-   * @return boolean collision
-   */
-  public boolean getCollision();
+	/**
+	 * Fonction qui d√©termine si il y a une collision
+	 * 
+	 * @param b
+	 *            la collision
+	 */
+	public void setCollision(boolean b);
 
-  /**
-   * le modele fait subir une collision entre l'oiseau et l'obstacle
-   * 
-   * @param o l'obstacle avec lequel a eu lieu une collision
-   */
-  public void collision(Obstacle o);
+	/**
+	 * renvoie si le modele a subit une collision
+	 * 
+	 * @return boolean collision
+	 */
+	public boolean getCollision();
 
-  /**
-   * le modele fait subir une collision entre deux obstacles
-   * 
-   * @param o1 le premier obstacle de la collision
-   * @param o2 le deuxieme obstacle de la collision
-   */
-  public void collision(Obstacle o1, Obstacle o2);
+	/**
+	 * le modele fait subir une collision entre l'oiseau et l'obstacle
+	 * 
+	 * @param o
+	 *            l'obstacle avec lequel a eu lieu une collision
+	 */
+	public void collision(Obstacle o);
 
-  public void collisionSol();
+	/**
+	 * le modele fait subir une collision entre deux obstacles
+	 * 
+	 * @param o1
+	 *            le premier obstacle de la collision
+	 * @param o2
+	 *            le deuxieme obstacle de la collision
+	 */
+	public void collision(Obstacle o1, Obstacle o2);
 
-  public void collisionSol(Obstacle o);
+	/**
+	 * Verifie la collison avec le sol
+	 */
+	public void collisionSol();
 
-  public void launchPad();
+	/**
+	 * VÈrifie collision avec le sol d'un obstacle
+	 * 
+	 * @param o
+	 */
+	public void collisionSol(Obstacle o);
+
+	/**
+	 * VÈrifie le LaunchPad et boucle tant que le lancement n'est pas confirmÈ
+	 */
+	public void launchPad();
 }

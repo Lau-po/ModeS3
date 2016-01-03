@@ -166,10 +166,16 @@ public class Gravite extends ObservableModele implements ActionListener {
 		return -y + 470;
 	}
 
+	/**
+	 * @param d
+	 */
 	public void setK(double d) {
 		this.k = d;
 	}
 
+	/**
+	 * @return
+	 */
 	public double getK() {
 		return k;
 	}
@@ -220,6 +226,9 @@ public class Gravite extends ObservableModele implements ActionListener {
 				2 * vg[1] - o2.getVitesse()[1]);
 	}
 
+	/* (non-Javadoc)
+	 * @see modele.ObservableModele#collisionSol()
+	 */
 	@Override
 	public void collisionSol() {
 		double[] vg = new double[] {
@@ -229,6 +238,9 @@ public class Gravite extends ObservableModele implements ActionListener {
 		System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
+	/* (non-Javadoc)
+	 * @see modele.ObservableModele#collisionSol(modele.Obstacle)
+	 */
 	@Override
 	public void collisionSol(Obstacle o) {
 		double[] vg = new double[] {
@@ -238,15 +250,25 @@ public class Gravite extends ObservableModele implements ActionListener {
 				- o.getVitesse()[1]);
 	}
 
+	/* (non-Javadoc)
+	 * @see modele.ObservableModele#launchPad()
+	 */
 	@Override
 	public void launchPad() {
+		double tempX = 0.0;
+		double tempY = 0.0;
 		if(!slingshot.isLaunched()){
 			vitesse[0] = slingshot.getVector()[0]*1.3;
 			vitesse[1] = slingshot.getVector()[1]*1.3;
+			if(slingshot.getMousePosition()[0] != tempX || slingshot.getMousePosition()[1] != tempY){
+				setChanged();
+			}
 			hasChanged();
 			notifyObservers();
 			checkIfDone();
 		}
+		tempX = slingshot.getMousePosition()[0];
+		tempY = slingshot.getMousePosition()[1];
 	}
 
 }

@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
+import controller.Controller;
+
 @SuppressWarnings("serial")
 public class Slingshot extends Point {
 	/** Couleur du point d'envoi */
@@ -16,14 +18,20 @@ public class Slingshot extends Point {
 	private int width;
 	private int height;
 	/** Position du Point d'envoi */
-	private double[] position = new double[] { 0.0, 0.0 };
+	private double[] position = new double[] { 130.0, 320.0 };
 	/** Position de l'oiseau avant envoi */
-	private double[] mousePosition = new double[] { 0.0, 0.0 };
-	/** Vrai si l'envoi est effectué */
+	private double[] mousePosition = new double[] { 130.0, 320.0 };
+	/** Validation du lancement de l'oiseau */
 	private boolean launch = false;
+	/** Validation de la zone de lancement*/
 	private boolean inCube = false;
-	private boolean isPressed = false;
+	/* Validation de l'appui */
+	private boolean isPressed = false;	
+	private ObservableModele modele;
 
+	/**
+	 * Ecoute des clicks
+	 */
 	private MouseAdapter clickListener = new MouseAdapter() {
 
 		@Override
@@ -48,6 +56,9 @@ public class Slingshot extends Point {
 		}
 	};
 
+	/**
+	 * Ecoute du mouvement du curseur
+	 */
 	private MouseMotionListener moveListener = new MouseMotionListener() {
 
 		@Override
@@ -80,6 +91,7 @@ public class Slingshot extends Point {
 		super(130, 150);
 		this.width = 10;
 		this.height = 200;
+		this.modele = modele;
 	}
 
 	/**
@@ -184,12 +196,19 @@ public class Slingshot extends Point {
 	}
 
 	/**
-	 * @return si le click à été effectué, ou pas
+	 * @return si le click a été effectué, ou pas
 	 */
 	public boolean isLaunched() {
 		return launch;
 	}
 
+	/**
+	 * @return si le curseur est la le cube, ou pas
+	 */
+	public boolean isInCube() {
+		return inCube;
+	}
+	
 	/**
 	 * Donne la valeur à lauch
 	 * 
@@ -199,15 +218,24 @@ public class Slingshot extends Point {
 		this.launch = launch;
 	}
 
+	/**
+	 * recupere le vecteur de force du slingshot
+	 * @return une force [x;y]
+	 */
 	public double[] getVector() {
 		double[] vector = new double[] { 0.0, 0.0 };
 		vector[0] = this.getX() - position[0]+3;
-		vector[1] = -(this.getY()+180 - position[1]+4);
+		vector[1] = -(this.getY()+184 - position[1]);
 		return vector;
 	}
 	
+	/**
+	 * Revalide le Slingshot
+	 */
 	public void reloadSlingshot(){
 		inCube = false;
 		launch = false;
+		position = new double[] { 130.0, 320.0 };
+		mousePosition = new double[] { 130.0, 320.0 };
 	}
 }

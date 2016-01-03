@@ -77,9 +77,18 @@ public class JeuPanel extends JPanel implements Observer {
     if (modele instanceof Gravite) {
         g.fillOval((int)modele.getSlingshot().getLocation().getX(),((Gravite) modele).inverse((int)modele.getSlingshot().getLocation().getY()),modele.getSlingshot().getSize()[0],(int) modele.getSlingshot().getSize()[1]);
       }
-    g.setColor(Color.green);
-    if (modele instanceof Gravite) {
-        g.fillOval((int)modele.getSlingshot().getMousePosition()[0],(int)modele.getSlingshot().getMousePosition()[1],10,10);
+    if(modele instanceof Gravite && !((Gravite) modele).getSlingshot().isLaunched()){
+    	if(modele instanceof Gravite && ((Gravite) modele).getSlingshot().isInCube()){
+    		g.setColor(Color.green);
+    	}else{
+    		g.setColor(Color.red);
+    	}
+    	if (modele instanceof Gravite) {
+    		g.fillOval((int)modele.getSlingshot().getMousePosition()[0]-5,(int)modele.getSlingshot().getMousePosition()[1]-5,10,10);
+    	}
+    	if (modele instanceof Gravite) {
+    		g.drawLine((int)modele.getSlingshot().getMousePosition()[0], (int)modele.getSlingshot().getMousePosition()[1], (int)modele.getSlingshot().getLocation().getX(), ((Gravite) modele).inverse((int)modele.getSlingshot().getLocation().getY()));
+    	}
     }
     List<Point> courbe = modele.getCourbe();
     for (int i = 0; i < courbe.size(); i++) {

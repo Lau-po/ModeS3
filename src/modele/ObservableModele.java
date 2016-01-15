@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
+import resources.Planets;
+
 public abstract class ObservableModele extends Observable implements Modele {
 
   /** la liste des points formant la courbe */
@@ -25,6 +27,9 @@ public abstract class ObservableModele extends Observable implements Modele {
   public boolean done = false;
   /** Slingshot */
   protected Slingshot slingshot;
+  /** Menu */
+  protected Planets p;
+  boolean Choosed = false;
   
   /**
    * Construit un modele observable

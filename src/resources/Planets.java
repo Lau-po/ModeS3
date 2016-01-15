@@ -12,4 +12,14 @@ public enum Planets {
 		// TODO Auto-generated constructor stub
 		this.gravity = gravity;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.name() ;
+	}
+	
+	public double getGravity(){
+		return this.gravity;
+	}
 }

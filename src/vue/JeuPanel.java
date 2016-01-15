@@ -44,10 +44,10 @@ public class JeuPanel extends JPanel implements Observer {
     this.modele = modele;
     this.controller = controller;
       try {
-          background = ImageIO.read(new File("pictures/background.jpg"));
-          slingshot = ImageIO.read(new File("pictures/slingshot.png"));
-          cloud = ImageIO.read(new File("pictures/cloud.gif"));
-          piaf = ImageIO.read(new File("pictures/piaf.png"));
+          background = ImageIO.read(new File("src/resources/background.jpg"));
+          slingshot = ImageIO.read(new File("src/resources/slingshot.png"));
+        /*  cloud = ImageIO.read(new File("pictures/cloud.gif"));*/
+          piaf = ImageIO.read(new File("src/resources/piaf.png"));
       } catch (IOException ex) {
           Logger.getLogger(JeuPanel.class.getName()).log(Level.SEVERE, null, ex);
       }

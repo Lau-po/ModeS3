@@ -48,11 +48,11 @@ public class Constants {
      public static final double GRAVITY_MOON = Double.parseDouble(props.getProperty("gLune"));
      public static final double GRAVITY_MARS = Double.parseDouble(props.getProperty("gMars"));
      
-     /**
+     /*
       * Fonction main pour la simulation
       * @param args
-      */
+      
      public static void main(String[] args) {
 		System.out.println(PAS + " " + NBR_SIMULATION);
-	}
+	}*/
 }

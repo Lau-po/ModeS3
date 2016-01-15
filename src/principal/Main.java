@@ -30,9 +30,10 @@ public class Main {
     // ObservableModele m = new Parabole(1);
     final ObservableModele m = new Gravite();   
     StartPanel start = new StartPanel(m);
+    while(!m.isChoosed());;
     final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
-
+  
     ActionListener al = new ActionListener() {
       int cpt = 1;
 

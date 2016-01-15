@@ -38,6 +38,8 @@ public class Constants {
      public static final double PDS_OBSTACLE = Double.parseDouble(props.getProperty("poidsObstacle"));     
 
      public static final double PDS_OISEAU = Double.parseDouble(props.getProperty("poidsOiseau"));
+     
+     public static final int TAILLE_PIAF = Integer.parseInt(props.getProperty("tailleOiseau"));
           
      public static final double K = Double.parseDouble(props.getProperty("k"));
      

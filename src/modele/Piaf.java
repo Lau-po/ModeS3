@@ -9,6 +9,8 @@ package modele;
 import java.awt.Color;
 import java.awt.Point;
 
+import resources.Constants;
+
 @SuppressWarnings("serial")
 public class Piaf extends Point {
 	/** Bec lié à l'oiseau */
@@ -17,6 +19,13 @@ public class Piaf extends Point {
 	private boolean touched;
 	/** La couleur de l'oiseau */
 	private Color c = Color.red;
+	private double oldPX;
+	private double oldPY;
+	private int size = Constants.TAILLE_PIAF;
+
+	public int size() {
+		return size;
+	}
 
 	/**
 	 * Constructeur de base
@@ -32,6 +41,34 @@ public class Piaf extends Point {
 		super(x, y);
 		this.bec = new Bec(this, pointe_bec);
 		this.touched = false;
+	}
+	
+	public Piaf(int x, int y) {
+		super(x, y);
+	}
+	
+	public void setPosition(double x, double y){
+		oldPX = this.getX();
+		oldPY = this.getY();
+		super.setLocation(x, y);
+	}
+	
+	
+
+	public double getOldPX() {
+		return oldPX;
+	}
+
+	public void setOldPX(double oldPX) {
+		this.oldPX = oldPX;
+	}
+
+	public double getOldPY() {
+		return oldPY;
+	}
+
+	public void setOldPY(double oldPY) {
+		this.oldPY = oldPY;
 	}
 
 	/**

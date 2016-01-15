@@ -101,7 +101,7 @@ public class JeuPanel extends JPanel implements Observer {
 				g.setColor(Color.red);
 			}
 			if (modele instanceof Gravite) {
-				g.fillOval((int) modele.getSlingshot().getMousePosition()[0] - 5,(int) modele.getSlingshot().getMousePosition()[1] - 5,10, 10);
+				g.fillOval((int) modele.getSlingshot().getMousePosition()[0] - modele.getPiaf().size()/2,(int) modele.getSlingshot().getMousePosition()[1] - modele.getPiaf().size()/2,modele.getPiaf().size(), modele.getPiaf().size());
 			}
 		}
 		g.drawImage(slingshot, 85, 300, 80, 150, this);
@@ -118,6 +118,13 @@ public class JeuPanel extends JPanel implements Observer {
 					 }*/
 				}
 				g.setColor(Color.white);
+			}
+		
+		}
+		if (modele instanceof Gravite) {
+			if(((Gravite) modele).getSlingshot().isLaunched()){
+				g.setColor(modele.getPiaf().getC());
+				g.fillOval((int) (modele.getPiaf().getX() - (modele.getPiaf().size() / 2)),((Gravite) modele).inverse((int)modele.getPiaf().getY())- (modele.getPiaf().size() / 2), modele.getPiaf().size(), modele.getPiaf().size());
 			}
 		}
 		List<Obstacle> obs = modele.getObstacles();

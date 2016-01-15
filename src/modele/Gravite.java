@@ -46,6 +46,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 	@Override
 	public void go() {
 		g = getP().getGravity();
+		oiseau.setLocation(new Point(130,150));
 		t = new Timer(1, this);
 		t.start();
 	}
@@ -59,9 +60,11 @@ public class Gravite extends ObservableModele implements ActionListener {
 					acceleration(obstacle);
 					deplacement(obstacle);
 				}
+				//System.out.println(oiseau.getX() + "  " + oiseau.getY());
 				acceleration();
 				deplacement();
 				courbe.add(new Point((int) position[0], (int) position[1]));
+				oiseau.setLocation(position[0], position[1]);
 				setChanged();
 				notifyObservers();
 				checkIfDone();
@@ -215,8 +218,8 @@ public class Gravite extends ObservableModele implements ActionListener {
 						/ (poidsObstacle + poidsOiseau),
 				(poidsOiseau * vitesse[1] + poidsObstacle * o.getVitesse()[1])
 						/ (poidsObstacle + poidsOiseau) };
-		System.out.println("y = "+ getCourbe().get(getCourbe().size()-1).getY() + "  " + o.y);
-		System.out.println("x = "+ getCourbe().get(getCourbe().size()-1).getX() + "  " + o.x);
+		//System.out.println("y = "+ getCourbe().get(getCourbe().size()-1).getY() + "  " + o.y);
+		//System.out.println("x = "+ getCourbe().get(getCourbe().size()-1).getX() + "  " + o.x);
 		/*if(getCourbe().get(getCourbe().size()-1).getX() > o.x && getCourbe().get(getCourbe().size()-1).getY() < o.y){
 			setVitesse(2 * vg[0] + vitesse[0], 2 * vg[1] - vitesse[1]);
 		}else{*/
@@ -249,7 +252,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 				(poidsOiseau * vitesse[0]) / (Double.MAX_VALUE),
 				(poidsOiseau * vitesse[1]) / (Double.MAX_VALUE) };
 		setVitesse((2 * vg[0] + vitesse[0])*0.9, (2 * vg[1] - vitesse[1])*0.7);
-		System.out.println(vitesse[0] + " " + vitesse[1]);
+		//System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
 	/*

@@ -4,6 +4,7 @@ nbrSimul=20
 k=0.001
 kObstacle=0.001
 poidsOiseau=50.0
+tailleOiseau = 20
 poidsObstacle=150.0
 gTerre=9.81
 gLune=1.62

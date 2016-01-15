@@ -105,7 +105,7 @@ public class JeuPanel extends JPanel implements Observer {
     List<Point> courbe = modele.getCourbe();
     for (int i = 0; i < courbe.size(); i++) {
       if (i % 10 == 0) {
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         if (modele instanceof Gravite) {
           if( i == courbe.size()-1){
             g.drawImage(piaf, courbe.get(i).x - (5/2), ((Gravite) modele).inverse(courbe.get(i).y), 20,20, this);

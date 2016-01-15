@@ -16,124 +16,133 @@ import resources.Planets;
 
 public abstract class ObservableModele extends Observable implements Modele {
 
-  /** la liste des points formant la courbe */
-  protected List<Point> courbe;
-  /** la liste des obstacles du jeu */
-  protected List<Obstacle> obstacles;
-  /** vrai si la courbe est entree en collision avec un obstacle */
-  protected boolean collision;
-  /** l'oiseau */
-  protected Piaf oiseau;
-  public boolean done = false;
-  /** Slingshot */
-  protected Slingshot slingshot;
-  /** Menu */
-  protected Planets p;
-  boolean Choosed = false;
-  
-  /**
-   * Construit un modele observable
-   */
-  public ObservableModele() {
-	slingshot = new Slingshot();
-    courbe = new ArrayList<Point>();
-    obstacles = new ArrayList<Obstacle>();
-    oiseau = new Piaf(0, 0, new Point(0, 0));
-  }
+	/** la liste des points formant la courbe */
+	protected List<Point> courbe;
+	/** la liste des obstacles du jeu */
+	protected List<Obstacle> obstacles;
+	/** vrai si la courbe est entree en collision avec un obstacle */
+	protected boolean collision;
+	/** l'oiseau */
+	protected Piaf oiseau;
+	public boolean done = false;
+	/** Slingshot */
+	protected Slingshot slingshot;
+	/** Menu */
+	boolean choosed = false;
 
-  /**
-   * Retourne le Slingshot
-   * @return un Slingshot
-   */
-  public Slingshot getSlingshot() {
-	return slingshot;
-  }
+	/**
+	 * Construit un modele observable
+	 */
+	public ObservableModele() {
+		slingshot = new Slingshot();
+		courbe = new ArrayList<Point>();
+		obstacles = new ArrayList<Obstacle>();
+		oiseau = new Piaf(0, 0, new Point(0, 0));
+	}
 
-  /**
-   * Donne les valeurs de bases au slingshot
- * @param slingshot
- */
-public void setSlingshot(Slingshot slingshot) {
-	this.slingshot = slingshot;
-  }
+	/**
+	 * Retourne le Slingshot
+	 * 
+	 * @return un Slingshot
+	 */
+	public Slingshot getSlingshot() {
+		return slingshot;
+	}
 
-/**
-   * @see Modele
-   */
-  @Override
-  abstract public void go();
+	/**
+	 * Donne les valeurs de bases au slingshot
+	 * 
+	 * @param slingshot
+	 */
+	public void setSlingshot(Slingshot slingshot) {
+		this.slingshot = slingshot;
+	}
 
-  /**
-   * @see Modele
-   */
-  @Override
-  public List<Point> getCourbe() {
-    return courbe;
-  }
+	/**
+	 * @see Modele
+	 */
+	@Override
+	abstract public void go();
 
-  /**
-   * @see Modele
-   */
-  @Override
-  public List<Obstacle> getObstacles() {
-    return obstacles;
-  }
+	/**
+	 * @see Modele
+	 */
+	@Override
+	public List<Point> getCourbe() {
+		return courbe;
+	}
 
-  /**
-   * @see Modele
-   */
-  @Override
-  abstract public void reset();
+	/**
+	 * @see Modele
+	 */
+	@Override
+	public List<Obstacle> getObstacles() {
+		return obstacles;
+	}
 
-  /**
-   * @see Modele
-   */
-  @Override
-  public void setCollision(boolean b) {
-    this.collision = b;
-  }
+	/**
+	 * @see Modele
+	 */
+	@Override
+	abstract public void reset();
 
-  @Override
-  public boolean getCollision() {
-    return collision;
-  }
+	/**
+	 * @see Modele
+	 */
+	@Override
+	public void setCollision(boolean b) {
+		this.collision = b;
+	}
 
-  /**
-   * Fonction qui génère les obstacles
-   */
-  void genObstacles() {
-    Random random = new Random();
-    int nb = random.nextInt(5) + 50;
-    int x;
-    int y;
-    for (int i = 0; i < nb; i++) {
-      x = random.nextInt(450) + 350 - 30;
-      y = random.nextInt(400) + 30;
-      obstacles.add(new Obstacle(x, y, 15));
-    }
-  }
+	@Override
+	public boolean getCollision() {
+		return collision;
+	}
 
-  /**
-   * @see Modele
-   */
-  @Override
-  public Piaf getPiaf() {
-    return oiseau;
-  }
+	/**
+	 * Fonction qui génère les obstacles
+	 */
+	void genObstacles() {
+		Random random = new Random();
+		int nb = random.nextInt(5) + 50;
+		int x;
+		int y;
+		for (int i = 0; i < nb; i++) {
+			x = random.nextInt(450) + 350 - 30;
+			y = random.nextInt(400) + 30;
+			obstacles.add(new Obstacle(x, y, 15));
+		}
+	}
 
-  @Override
-  abstract public void collision(Obstacle o);
+	/**
+	 * @see Modele
+	 */
+	@Override
+	public Piaf getPiaf() {
+		return oiseau;
+	}
 
-  @Override
-  abstract public void collision(Obstacle o1, Obstacle o2);
+	public boolean isChoosed() {
+		return choosed;
+	}
 
-  @Override
-  abstract public void collisionSol();
+	public void setChoosed(boolean choosed) {
+		this.choosed = choosed;
+	}
 
-  @Override
-  abstract public void collisionSol(Obstacle o);
-  
-  @Override
-  abstract public void launchPad();
+	@Override
+	abstract public void collision(Obstacle o);
+
+	@Override
+	abstract public void collision(Obstacle o1, Obstacle o2);
+
+	@Override
+	abstract public void collisionSol();
+
+	@Override
+	abstract public void collisionSol(Obstacle o);
+
+	@Override
+	abstract public void launchPad();
 
 }

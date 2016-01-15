@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 import resources.Constants;
+import vue.StartPanel;
 
 public class Gravite extends ObservableModele implements ActionListener {
 
 	/** Constate gravitationnel */
-	private double g = Constants.GRAVITY_EARTH;
+	private double g = Constants.GRAVITY_MARS;
 	/** pas de la simulation */
 	private double dt = 0.01;
 	/** vecteur position */
@@ -28,7 +29,8 @@ public class Gravite extends ObservableModele implements ActionListener {
 	/** poids des obstacles */
 	private double poidsObstacle = Constants.PDS_OBSTACLE;
 	private Timer t;
-
+	
+	
 	/**
 	 * Constructeur de base
 	 */
@@ -48,20 +50,22 @@ public class Gravite extends ObservableModele implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		launchPad();
-		if (position[1] >= 0 && slingshot.isLaunched()) {
-			for (Obstacle obstacle : obstacles) {
-				acceleration(obstacle);
-				deplacement(obstacle);
+		//if (isChoosed()) {
+			launchPad();
+			if (position[1] >= 0 && slingshot.isLaunched()) {
+				for (Obstacle obstacle : obstacles) {
+					acceleration(obstacle);
+					deplacement(obstacle);
+				}
+				acceleration();
+				deplacement();
+				courbe.add(new Point((int) position[0], (int) position[1]));
+				setChanged();
+				notifyObservers();
+				checkIfDone();
+				// done = false;
 			}
-			acceleration();
-			deplacement();
-			courbe.add(new Point((int) position[0], (int) position[1]));
-			setChanged();
-			notifyObservers();
-			checkIfDone();
-			// done = false;
-		}
+		//}
 		// else {
 		// done = true;
 		// t.stop();
@@ -86,6 +90,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		genObstacles();
 		collision = false;
 		done = false;
+		setChoosed(false);
 		k = 0.001;
 	}
 
@@ -181,8 +186,8 @@ public class Gravite extends ObservableModele implements ActionListener {
 	}
 
 	/**
-	 * verifie si la simulation doit se terminer c�d si l'oiseau est sur le sol
-	 * et ne rebondit plus
+	 * verifie si la simulation doit se terminer c�d si l'oiseau est sur le
+	 * sol et ne rebondit plus
 	 */
 	private void checkIfDone() {
 		if (vitesse[0] > -0.01 && vitesse[0] < 0.01) {
@@ -226,7 +231,9 @@ public class Gravite extends ObservableModele implements ActionListener {
 				2 * vg[1] - o2.getVitesse()[1]);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see modele.ObservableModele#collisionSol()
 	 */
 	@Override
@@ -238,7 +245,9 @@ public class Gravite extends ObservableModele implements ActionListener {
 		System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see modele.ObservableModele#collisionSol(modele.Obstacle)
 	 */
 	@Override
@@ -250,17 +259,24 @@ public class Gravite extends ObservableModele implements ActionListener {
 				- o.getVitesse()[1]);
 	}
 
-	/* (non-Javadoc)
+	public void setG(double g) {
+		this.g = g;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see modele.ObservableModele#launchPad()
 	 */
 	@Override
 	public void launchPad() {
 		double tempX = 0.0;
 		double tempY = 0.0;
-		if(!slingshot.isLaunched()){
-			vitesse[0] = slingshot.getVector()[0]*1.3;
-			vitesse[1] = slingshot.getVector()[1]*1.3;
-			if(slingshot.getMousePosition()[0] != tempX || slingshot.getMousePosition()[1] != tempY){
+		if (!slingshot.isLaunched()) {
+			vitesse[0] = slingshot.getVector()[0] * 1.3;
+			vitesse[1] = slingshot.getVector()[1] * 1.3;
+			if (slingshot.getMousePosition()[0] != tempX
+					|| slingshot.getMousePosition()[1] != tempY) {
 				setChanged();
 			}
 			hasChanged();

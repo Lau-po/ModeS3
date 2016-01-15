@@ -15,6 +15,7 @@ import modele.Gravite;
 import modele.ObservableModele;
 import resources.Constants;
 import vue.Jeu;
+import vue.StartPanel;
 import controller.Controller;
 
 public class Main {
@@ -27,7 +28,9 @@ public class Main {
   public static void main(String[] args) {
     // ObservableModele m = new Bezier(0.002);
     // ObservableModele m = new Parabole(1);
-    final ObservableModele m = new Gravite();
+    final ObservableModele m = new Gravite();   
+    StartPanel start = new StartPanel(m);
+    while(!m.isChoosed()) System.out.println("SALUUUUUT");
     final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
 

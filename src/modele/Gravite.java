@@ -75,8 +75,11 @@ public class Gravite extends ObservableModele implements ActionListener {
 	}
 
 	public void setVitesse(double x, double z) {
+		oldVitesse[0] = vitesse[0];
+		oldVitesse[1] = vitesse[1];
 		vitesse[0] = x;
 		vitesse[1] = z;
+		
 	}
 
 	/**
@@ -192,10 +195,12 @@ public class Gravite extends ObservableModele implements ActionListener {
 	 * sol et ne rebondit plus
 	 */
 	private void checkIfDone() {
-		if (vitesse[0] > -0.4 && vitesse[0] < 0.4) {
+		if (vitesse[0] > -0.1 && vitesse[0] < 0.1) {
 			if (vitesse[1] > -1 && vitesse[1] < 1) {
+				//if(oldVitesse[1] > vitesse[1]){
 				done = true;
 				t.stop();
+			//	}
 			}
 		}
 	}
@@ -212,11 +217,11 @@ public class Gravite extends ObservableModele implements ActionListener {
 						/ (poidsObstacle + poidsOiseau) };
 		System.out.println("y = "+ getCourbe().get(getCourbe().size()-1).getY() + "  " + o.y);
 		System.out.println("x = "+ getCourbe().get(getCourbe().size()-1).getX() + "  " + o.x);
-		if(getCourbe().get(getCourbe().size()-1).getX() > o.x && getCourbe().get(getCourbe().size()-1).getY() < o.y){
+		/*if(getCourbe().get(getCourbe().size()-1).getX() > o.x && getCourbe().get(getCourbe().size()-1).getY() < o.y){
 			setVitesse(2 * vg[0] + vitesse[0], 2 * vg[1] - vitesse[1]);
-		}else{
+		}else{*/
 			setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
-		}
+		//}
 		o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1]- o.getVitesse()[1]);
 	}
 
@@ -243,7 +248,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		double[] vg = new double[] {
 				(poidsOiseau * vitesse[0]) / (Double.MAX_VALUE),
 				(poidsOiseau * vitesse[1]) / (Double.MAX_VALUE) };
-		setVitesse(2 * vg[0] + vitesse[0], 1.5 * vg[1] - vitesse[1]*0.9);
+		setVitesse((2 * vg[0] + vitesse[0])*0.9, (2 * vg[1] - vitesse[1])*0.7);
 		System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
@@ -257,7 +262,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		double[] vg = new double[] {
 				(poidsObstacle * o.getVitesse()[0]) / (Double.MAX_VALUE),
 				(poidsObstacle * o.getVitesse()[1]) / (Double.MAX_VALUE) };
-		o.setVitesse(2 * vg[0] + o.getVitesse()[0], 1.5 * vg[1]	- o.getVitesse()[1]*0.9);
+		o.setVitesse((2 * vg[0] + o.getVitesse()[0])*0.9, (1.5 * vg[1]	- o.getVitesse()[1])*0.7);
 	}
 
 	public void setG(double g) {

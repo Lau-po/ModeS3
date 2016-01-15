@@ -34,7 +34,7 @@ public class JeuPanel extends JPanel implements Observer {
     super(layout, doubleBuffer);
   }
 
-  public JeuPanel(ObservableModele modele, Controller controller, LayoutManager layout,
+  public JeuPanel(final ObservableModele modele, Controller controller, LayoutManager layout,
       boolean doubleBuffer) {
     this(layout, doubleBuffer);
     this.modele = modele;

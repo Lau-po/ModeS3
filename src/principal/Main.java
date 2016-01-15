@@ -27,7 +27,7 @@ public class Main {
   public static void main(String[] args) {
     // ObservableModele m = new Bezier(0.002);
     // ObservableModele m = new Parabole(1);
-    ObservableModele m = new Gravite();
+    final ObservableModele m = new Gravite();
     final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
 

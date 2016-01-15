@@ -41,6 +41,8 @@ public class Slingshot extends Point {
 				if (inCube) {
 					setLaunchValue(true);					
 					System.out.println("Launched\n vector : "+getVector()[0]+","+getVector()[1] + "\n Position : "+position[0]+","+position[1]);
+				}else{
+					setPosition(130, 150);
 				}
 				System.out.println("Released");
 			}
@@ -129,7 +131,7 @@ public class Slingshot extends Point {
 	}
 
 	/**
-	 * Donne la couleur au point de départ
+	 * Donne la couleur au point de dï¿½part
 	 * 
 	 * @param c
 	 */
@@ -147,7 +149,7 @@ public class Slingshot extends Point {
 	}
 
 	/**
-	 * Donne la taille au point de départ
+	 * Donne la taille au point de dï¿½part
 	 * 
 	 * @param size
 	 */
@@ -166,7 +168,7 @@ public class Slingshot extends Point {
 	}
 
 	/**
-	 * Donne la position [x;y] au point de départ
+	 * Donne la position [x;y] au point de dï¿½part
 	 * 
 	 * @param position
 	 *            [x;y]
@@ -196,7 +198,7 @@ public class Slingshot extends Point {
 	}
 
 	/**
-	 * @return si le click a été effectué, ou pas
+	 * @return si le click a ï¿½tï¿½ effectuï¿½, ou pas
 	 */
 	public boolean isLaunched() {
 		return launch;
@@ -210,7 +212,7 @@ public class Slingshot extends Point {
 	}
 	
 	/**
-	 * Donne la valeur à lauch
+	 * Donne la valeur ï¿½ lauch
 	 * 
 	 * @param launch
 	 */

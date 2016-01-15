@@ -44,7 +44,9 @@ public class Constants {
      public static final double K_OBSTACLE = Double.parseDouble(props.getProperty("kObstacle"));
      
 
-     public static final double GRAVITY = Double.parseDouble(props.getProperty("g"));
+     public static final double GRAVITY_EARTH = Double.parseDouble(props.getProperty("gTerre"));
+     public static final double GRAVITY_MOON = Double.parseDouble(props.getProperty("gLune"));
+     public static final double GRAVITY_MARS = Double.parseDouble(props.getProperty("gMars"));
      
      /**
       * Fonction main pour la simulation

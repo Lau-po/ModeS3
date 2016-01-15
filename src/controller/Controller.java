@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Observer;
 
+import modele.Gravite;
 import modele.Modele;
 import modele.Obstacle;
 
@@ -93,8 +94,10 @@ public class Controller {
 	}
 
 	private boolean collisionSol(Point a) {
-		if (a.getX() < 100) {
-			return false;
+		if (a.getX() < 0) {
+			if(modele instanceof Gravite){
+				((Gravite) modele).setVitesse(0, 0);
+			}
 		}
 		return collision(a, new Obstacle((int) a.getX(), 0, 15));
 	}

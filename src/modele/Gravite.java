@@ -12,7 +12,7 @@ import resources.Constants;
 public class Gravite extends ObservableModele implements ActionListener {
 
 	/** Constate gravitationnel */
-	private double g = Constants.GRAVITY;
+	private double g = Constants.GRAVITY_EARTH;
 	/** pas de la simulation */
 	private double dt = 0.01;
 	/** vecteur position */
@@ -68,7 +68,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		// }
 	}
 
-	private void setVitesse(double x, double z) {
+	public void setVitesse(double x, double z) {
 		vitesse[0] = x;
 		vitesse[1] = z;
 	}
@@ -181,7 +181,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 	}
 
 	/**
-	 * verifie si la simulation doit se terminer càd si l'oiseau est sur le sol
+	 * verifie si la simulation doit se terminer cï¿½d si l'oiseau est sur le sol
 	 * et ne rebondit plus
 	 */
 	private void checkIfDone() {

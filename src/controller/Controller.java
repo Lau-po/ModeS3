@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Observer;
 
+import resources.Constants;
 import modele.Gravite;
 import modele.Modele;
 import modele.Obstacle;
@@ -74,11 +75,11 @@ public class Controller {
 	private boolean collision(Point a, Obstacle b) {
 		double r, diffX, diffY, d;
 		if (a instanceof Obstacle) {
-			r = 15 / 2;
+			r = 15/2 ;
 			diffX = ((Obstacle) a).getPosition()[0] - b.getPosition()[0];
 			diffY = ((Obstacle) a).getPosition()[1] - b.getPosition()[1];
 			d = diffX * diffX + diffY * diffY;
-			if (d > (r + 15) * (r + 15)) {
+			if (d > (15+r) * (15+r)) {
 				return false;
 			}
 			return true;
@@ -87,14 +88,14 @@ public class Controller {
 		diffX = a.getX() - b.getPosition()[0];
 		diffY = a.getY() - b.getPosition()[1];
 		d = diffX * diffX + diffY * diffY;
-		if (d > (r + 15) * (r + 15)) {
+		if (d > (Constants.TAILLE_PIAF) * (Constants.TAILLE_PIAF)) {
 			return false;
 		}
 		return true;
 	}
 
 	private boolean collisionSol(Point a) {
-		if (a.getX() < 0) {
+		if (a.getX() < 0 ||  a.getX() > 900 || a.getY() < 0) {
 			if(modele instanceof Gravite){
 				((Gravite) modele).setVitesse(0, 0);
 			}

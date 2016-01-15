@@ -1,6 +1,7 @@
 package vue;
 
 import controller.Controller;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,6 +9,8 @@ import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,9 +18,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
 import modele.Gravite;
 import modele.Modele;
 import modele.ObservableModele;
@@ -29,7 +34,7 @@ public class JeuPanel extends JPanel implements Observer {
 	private ObservableModele modele;
 	private Controller controller;
 	private Image background, slingshot, cloud, piaf;
-
+	
 	public JeuPanel() {
 		super();
 	}
@@ -89,6 +94,7 @@ public class JeuPanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		g.setColor(modele.getSlingshot().getC());
+		g.drawImage(slingshot, 85, 300, 80, 150, this);
 		if (modele instanceof Gravite && !((Gravite) modele).getSlingshot().isLaunched()) {
 			if (modele instanceof Gravite) {
 				g.setColor(new Color(76,43,00));
@@ -101,10 +107,10 @@ public class JeuPanel extends JPanel implements Observer {
 				g.setColor(Color.red);
 			}
 			if (modele instanceof Gravite) {
-				g.fillOval((int) modele.getSlingshot().getMousePosition()[0] - modele.getPiaf().size()/2,(int) modele.getSlingshot().getMousePosition()[1] - modele.getPiaf().size()/2,modele.getPiaf().size(), modele.getPiaf().size());
+				//g.fillOval((int) modele.getSlingshot().getMousePosition()[0] - modele.getPiaf().size()/2,(int) modele.getSlingshot().getMousePosition()[1] - modele.getPiaf().size()/2,modele.getPiaf().size(), modele.getPiaf().size());
+				g.drawImage(piaf,(int) modele.getSlingshot().getMousePosition()[0] - modele.getPiaf().size()/2,(int) modele.getSlingshot().getMousePosition()[1] - modele.getPiaf().size()/2,modele.getPiaf().size(), modele.getPiaf().size(), this);
 			}
 		}
-		g.drawImage(slingshot, 85, 300, 80, 150, this);
 		List<Point> courbe = modele.getCourbe();
 		for (int i = 0; i < courbe.size(); i++) {
 			if (i % 10 == 0) {
@@ -124,7 +130,8 @@ public class JeuPanel extends JPanel implements Observer {
 		if (modele instanceof Gravite) {
 			if(((Gravite) modele).getSlingshot().isLaunched()){
 				g.setColor(modele.getPiaf().getC());
-				g.fillOval((int) (modele.getPiaf().getX() - (modele.getPiaf().size() / 2)),((Gravite) modele).inverse((int)modele.getPiaf().getY())- (modele.getPiaf().size() / 2), modele.getPiaf().size(), modele.getPiaf().size());
+				//g.fillOval((int) (modele.getPiaf().getX() - (modele.getPiaf().size() / 2)),((Gravite) modele).inverse((int)modele.getPiaf().getY())- (modele.getPiaf().size() / 2), modele.getPiaf().size(), modele.getPiaf().size());
+				g.drawImage(modele.getPiaf().getImage(),(int) (modele.getPiaf().getX() - (modele.getPiaf().size() / 2)),((Gravite) modele).inverse((int)modele.getPiaf().getY())- (modele.getPiaf().size() / 2), modele.getPiaf().size(), modele.getPiaf().size(), this);
 			}
 		}
 		List<Obstacle> obs = modele.getObstacles();

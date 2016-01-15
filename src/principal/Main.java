@@ -41,11 +41,11 @@ public class Main {
       public void actionPerformed(ActionEvent arg0) {
         if (m.done) {
           cpt++;
-          if (cpt < Constants.NBR_SIMULATION) {
+          //if (cpt < Constants.NBR_SIMULATION) {
             f.restartSimulation();
-          } else {
-            System.exit(0);
-          }
+          //} else {
+          //  System.exit(0);
+          //}
         }
       }
     };

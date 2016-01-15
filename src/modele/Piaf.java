@@ -8,6 +8,13 @@ package modele;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import resources.Constants;
 
@@ -22,6 +29,8 @@ public class Piaf extends Point {
 	private double oldPX;
 	private double oldPY;
 	private int size = Constants.TAILLE_PIAF;
+	private BufferedImage image;
+	AffineTransformOp op;
 
 	public int size() {
 		return size;
@@ -41,6 +50,12 @@ public class Piaf extends Point {
 		super(x, y);
 		this.bec = new Bec(this, pointe_bec);
 		this.touched = false;
+		try {
+			image = ImageIO.read(new File("src/resources/piaf.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Piaf(int x, int y) {
@@ -160,5 +175,9 @@ public class Piaf extends Point {
 			}
 		}
 		return false;
+	}
+	
+	public BufferedImage getImage(){
+		return image;
 	}
 }

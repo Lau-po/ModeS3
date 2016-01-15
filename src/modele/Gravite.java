@@ -3,6 +3,8 @@ package modele;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -18,6 +20,8 @@ public class Gravite extends ObservableModele implements ActionListener {
 	private double dt = 0.01;
 	/** vecteur position */
 	private double[] position = new double[] { 130.0, 150.0 };
+	private double oldPosition =  0.0;
+	private double lastTop = 0.0;
 	/** vecteur vitesse */
 	private double[] vitesse = new double[] { 0.0, 0.0 };
 	private double[] oldVitesse = new double[] { -10.0, -10.0 };
@@ -120,12 +124,16 @@ public class Gravite extends ObservableModele implements ActionListener {
 	private void deplacement() {
 		double x = position[0];
 		double z = position[1];
+		oldPosition = position[1];
 		double dx = vitesse[0];
 		double dz = vitesse[1];
 		x = x + dx * dt;
 		z = z + dz * dt;
 		position[0] = x;
 		position[1] = z;
+		if(oldPosition > position[1]){
+			lastTop =oldPosition;
+		}
 	}
 
 	/**
@@ -198,15 +206,12 @@ public class Gravite extends ObservableModele implements ActionListener {
 	 * sol et ne rebondit plus
 	 */
 	private void checkIfDone() {
-		if (vitesse[0] > -0.1 && vitesse[0] < 0.1) {
-			if (vitesse[1] > -1 && vitesse[1] < 1) {
-				//if(oldVitesse[1] > vitesse[1]){
+		if (vitesse[0] > -0.05 && vitesse[0] < 0.05 && vitesse[1] > -1 && vitesse[1] < 1) {
 				done = true;
 				t.stop();
-			//	}
-			}
 		}
 	}
+
 
 	/**
 	 * @see Modele
@@ -218,13 +223,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 						/ (poidsObstacle + poidsOiseau),
 				(poidsOiseau * vitesse[1] + poidsObstacle * o.getVitesse()[1])
 						/ (poidsObstacle + poidsOiseau) };
-		//System.out.println("y = "+ getCourbe().get(getCourbe().size()-1).getY() + "  " + o.y);
-		//System.out.println("x = "+ getCourbe().get(getCourbe().size()-1).getX() + "  " + o.x);
-		/*if(getCourbe().get(getCourbe().size()-1).getX() > o.x && getCourbe().get(getCourbe().size()-1).getY() < o.y){
-			setVitesse(2 * vg[0] + vitesse[0], 2 * vg[1] - vitesse[1]);
-		}else{*/
 			setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
-		//}
 		o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1]- o.getVitesse()[1]);
 	}
 
@@ -251,8 +250,11 @@ public class Gravite extends ObservableModele implements ActionListener {
 		double[] vg = new double[] {
 				(poidsOiseau * vitesse[0]) / (Double.MAX_VALUE),
 				(poidsOiseau * vitesse[1]) / (Double.MAX_VALUE) };
+		if(vitesse[1] > 2*vg[1]){
+			vg[1] = vg[1]*1+(vitesse[1]-vg[1]);
+		}
 		setVitesse((2 * vg[0] + vitesse[0])*0.9, (2 * vg[1] - vitesse[1])*0.7);
-		//System.out.println(vitesse[0] + " " + vitesse[1]);
+		System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
 	/*

@@ -28,6 +28,7 @@ public abstract class ObservableModele extends Observable implements Modele {
 	/** Slingshot */
 	protected Slingshot slingshot;
 	/** Menu */
+	protected Planets p;
 	boolean choosed = false;
 
 	/**
@@ -56,6 +57,14 @@ public abstract class ObservableModele extends Observable implements Modele {
 	 */
 	public void setSlingshot(Slingshot slingshot) {
 		this.slingshot = slingshot;
+	}
+	
+	public Planets getP() {
+		return p;
+	}
+
+	public void setP(Planets p) {
+		this.p = p;
 	}
 
 	/**

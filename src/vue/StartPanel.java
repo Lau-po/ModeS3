@@ -85,8 +85,9 @@ public class StartPanel extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		if(arg0 instanceof Modele){
-			((Gravite) modele).setG(((Planets) options.getSelectedItem()).getGravity()); 
+			//((Gravite) modele).setG(((Planets) options.getSelectedItem()).getGravity()); 
 			((Gravite) modele).setChoosed(true);
+			((Gravite) modele).setP(((Planets) options.getSelectedItem()));;
 			this.setOpen(false);
 			modele.hasChanged();
 			modele.notifyObservers();

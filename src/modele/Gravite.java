@@ -13,13 +13,14 @@ import vue.StartPanel;
 public class Gravite extends ObservableModele implements ActionListener {
 
 	/** Constate gravitationnel */
-	private double g = Constants.GRAVITY_MARS;
+	private double g = Constants.GRAVITY_EARTH;
 	/** pas de la simulation */
 	private double dt = 0.01;
 	/** vecteur position */
 	private double[] position = new double[] { 130.0, 150.0 };
 	/** vecteur vitesse */
 	private double[] vitesse = new double[] { 0.0, 0.0 };
+	private double[] oldVitesse = new double[] { -10.0, -10.0 };
 	/** coefficients pour les frottements de l'air pour l'oiseau */
 	private double k = Constants.K;
 	/** coefficients pour les frottements de l'air pour les obstacles */
@@ -44,6 +45,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 	 */
 	@Override
 	public void go() {
+		g = getP().getGravity();
 		t = new Timer(1, this);
 		t.start();
 	}
@@ -190,7 +192,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 	 * sol et ne rebondit plus
 	 */
 	private void checkIfDone() {
-		if (vitesse[0] > -0.01 && vitesse[0] < 0.01) {
+		if (vitesse[0] > -0.4 && vitesse[0] < 0.4) {
 			if (vitesse[1] > -1 && vitesse[1] < 1) {
 				done = true;
 				t.stop();
@@ -208,9 +210,14 @@ public class Gravite extends ObservableModele implements ActionListener {
 						/ (poidsObstacle + poidsOiseau),
 				(poidsOiseau * vitesse[1] + poidsObstacle * o.getVitesse()[1])
 						/ (poidsObstacle + poidsOiseau) };
-		setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
-		o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1]
-				- o.getVitesse()[1]);
+		System.out.println("y = "+ getCourbe().get(getCourbe().size()-1).getY() + "  " + o.y);
+		System.out.println("x = "+ getCourbe().get(getCourbe().size()-1).getX() + "  " + o.x);
+		if(getCourbe().get(getCourbe().size()-1).getX() > o.x && getCourbe().get(getCourbe().size()-1).getY() < o.y){
+			setVitesse(2 * vg[0] + vitesse[0], 2 * vg[1] - vitesse[1]);
+		}else{
+			setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
+		}
+		o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1]- o.getVitesse()[1]);
 	}
 
 	/**
@@ -219,16 +226,11 @@ public class Gravite extends ObservableModele implements ActionListener {
 	@Override
 	public void collision(Obstacle o1, Obstacle o2) {
 		double[] vg = new double[] {
-				(poidsObstacle * o1.getVitesse()[0] + poidsObstacle
-						* o2.getVitesse()[0])
-						/ (poidsObstacle + poidsObstacle),
-				(poidsObstacle * o1.getVitesse()[1] + poidsObstacle
-						* o2.getVitesse()[1])
-						/ (poidsObstacle + poidsObstacle) };
-		o1.setVitesse(2 * vg[0] - o1.getVitesse()[0],
-				2 * vg[1] - o1.getVitesse()[1]);
-		o2.setVitesse(2 * vg[0] - o2.getVitesse()[0],
-				2 * vg[1] - o2.getVitesse()[1]);
+				(poidsObstacle * o1.getVitesse()[0] + poidsObstacle* o2.getVitesse()[0])/ (poidsObstacle + poidsObstacle),
+				(poidsObstacle * o1.getVitesse()[1] + poidsObstacle* o2.getVitesse()[1])/ (poidsObstacle + poidsObstacle)
+				};
+		o1.setVitesse(2 * vg[0] - o1.getVitesse()[0],2 * vg[1] - o1.getVitesse()[1]);
+		o2.setVitesse(2 * vg[0] - o2.getVitesse()[0],2 * vg[1] - o2.getVitesse()[1]);
 	}
 
 	/*
@@ -241,7 +243,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		double[] vg = new double[] {
 				(poidsOiseau * vitesse[0]) / (Double.MAX_VALUE),
 				(poidsOiseau * vitesse[1]) / (Double.MAX_VALUE) };
-		setVitesse(2 * vg[0] - vitesse[0], 2 * vg[1] - vitesse[1]);
+		setVitesse(2 * vg[0] + vitesse[0], 1.5 * vg[1] - vitesse[1]*0.9);
 		System.out.println(vitesse[0] + " " + vitesse[1]);
 	}
 
@@ -255,8 +257,7 @@ public class Gravite extends ObservableModele implements ActionListener {
 		double[] vg = new double[] {
 				(poidsObstacle * o.getVitesse()[0]) / (Double.MAX_VALUE),
 				(poidsObstacle * o.getVitesse()[1]) / (Double.MAX_VALUE) };
-		o.setVitesse(2 * vg[0] - o.getVitesse()[0], 2 * vg[1]
-				- o.getVitesse()[1]);
+		o.setVitesse(2 * vg[0] + o.getVitesse()[0], 1.5 * vg[1]	- o.getVitesse()[1]*0.9);
 	}
 
 	public void setG(double g) {
@@ -281,7 +282,6 @@ public class Gravite extends ObservableModele implements ActionListener {
 			}
 			hasChanged();
 			notifyObservers();
-			checkIfDone();
 		}
 		tempX = slingshot.getMousePosition()[0];
 		tempY = slingshot.getMousePosition()[1];

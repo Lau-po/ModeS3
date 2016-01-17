@@ -30,17 +30,21 @@ public class Main {
     // ObservableModele m = new Parabole(1);
     final ObservableModele m = new Gravite();   
     StartPanel start = new StartPanel(m);
-    while(!m.isChoosed()) System.out.println("SALUUUUUT");
+    while(!m.isChoosed()){
+    	if(!start.isShowing() && start.isOpen()){
+    		System.exit(0);
+    	}
+    }
     final Jeu f = new Jeu(m, new Controller());
     f.startSimulation();
 
     ActionListener al = new ActionListener() {
-      int cpt = 1;
+      //int cpt = 1;
 
       @Override
       public void actionPerformed(ActionEvent arg0) {
         if (m.done) {
-          cpt++;
+         // cpt++;
           //if (cpt < Constants.NBR_SIMULATION) {
             f.restartSimulation();
           //} else {
